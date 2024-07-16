@@ -7,45 +7,53 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    -- Available LSP Servers can be found at
-                    -- https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
-                    "lua_ls",
-                    "clangd",
-                    "angularls",
-                    "gradle_ls",
-                    "java_language_server",
-                    "html",
-                    "tsserver",
-                    "gopls",
-                }
-            })
-        end
+        lazy = false,
+        opts = {
+            auto_install = true
+        }
     },
     {
         "neovim/nvim-lspconfig",
+        lazy = false,
         config = function()
+            -- Integrate LSP with autocomplete
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
             local lspconfig = require("lspconfig")
 
             -- LUA
-            lspconfig.lua_ls.setup({})
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities
+            })
 
             -- FE Web Dev 
-            lspconfig.tsserver.setup({})
-            lspconfig.angularls.setup({})
-            lspconfig.html.setup({})
+            lspconfig.tsserver.setup({
+                capabilities = capabilities
+            })
+            lspconfig.angularls.setup({
+                capabilities = capabilities
+            })
+            lspconfig.html.setup({
+                capabilities = capabilities
+            })
 
             -- C and C++
-            lspconfig.clangd.setup({})
+            lspconfig.clangd.setup({
+                capabilities = capabilities
+            })
 
             -- Go
-            lspconfig.gopls.setup({})
+            lspconfig.gopls.setup({
+                capabilities = capabilities
+            })
 
             -- Java
-            lspconfig.java_language_server.setup({})
-            lspconfig.gradle_ls.setup({})
+            lspconfig.java_language_server.setup({
+                capabilities = capabilities
+            })
+            lspconfig.gradle_ls.setup({
+                capabilities = capabilities
+            })
 
         end
     }
