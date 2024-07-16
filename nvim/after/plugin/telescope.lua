@@ -1,6 +1,6 @@
 local builtin = require('telescope.builtin')
 -- project files
-vim.keymap.set('n', '<leader>FF', builtin.find_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
 
 -- git specific files
 vim.keymap.set('n', '<leader>fF', builtin.git_files, {})
