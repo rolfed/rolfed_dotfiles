@@ -1,5 +1,8 @@
 -- Directions for installing specific DAP servers
 -- Go - dependencies ['delve']
+--
+-- List of adapters: 
+-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
 return {
     "mfussenegger/nvim-dap",
