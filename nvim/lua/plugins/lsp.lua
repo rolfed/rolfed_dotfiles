@@ -16,6 +16,7 @@ return {
                     "clangd",
                     "angularls",
                     "gradle_ls",
+                    "java_language_server",
                     "html",
                     "tsserver",
                     "gopls",
@@ -31,8 +32,20 @@ return {
             -- LUA
             lspconfig.lua_ls.setup({})
 
-            -- Typescript
+            -- FE Web Dev 
             lspconfig.tsserver.setup({})
+            lspconfig.angularls.setup({})
+            lspconfig.html.setup({})
+
+            -- C and C++
+            lspconfig.clangd.setup({})
+
+            -- Go
+            lspconfig.gopls.setup({})
+
+            -- Java
+            lspconfig.java_language_server.setup({})
+            lspconfig.gradle_ls.setup({})
 
         end
     }
