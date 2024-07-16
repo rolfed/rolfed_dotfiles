@@ -1,15 +1,19 @@
 -- Directions for installing specific DAP servers
 -- Go - dependencies ['delve']
 --
--- List of adapters: 
+-- List of adapters:
 -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
 return {
     "mfussenegger/nvim-dap",
+    event = "VeryLazy",
     dependencies = {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
-        "leoluz/nvim-dap-go"
+        "leoluz/nvim-dap-go",
+    },
+    opts = {
+        handlers = {} -- loads defaults
     },
     config = function()
         local dap = require("dap")
@@ -19,6 +23,27 @@ return {
 
         -- Go
         require("dap-go").setup({})
+
+        -- C/C++ & Rust
+        dap.adapters.gdb = {
+            type = 'executable',
+            command = 'gdb',
+            args = { "-i", "dap" }
+        }
+
+        dap.configurations.c = {
+            {
+                name = "Launch",
+                type = "gdb",
+                request = "launch",
+                program = function()
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                end,
+                cwd = "${workspaceFolder}",
+                stopAtBeginningOfMainSubprogram = false,
+            },
+        }
+
 
         dap.listeners.before.attach.dapui_config = function()
             dapui.open()

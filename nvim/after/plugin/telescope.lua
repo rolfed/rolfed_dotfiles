@@ -3,7 +3,7 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>FF', builtin.find_files, {})
 
 -- git specific files
-vim.keymap.set('n', 'ff', builtin.git_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.git_files, {})
 
 -- find buffers
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -19,4 +19,4 @@ vim.api.nvim_create_user_command('OpenGitFilesInVSplit', function()
     require('telescope.builtin').git_files() -- Open Telescope to search Git files
 end, { nargs = 0 })
 
-vim.api.nvim_set_keymap('n', '<C-w>f', ':OpenGitFilesInVSplit<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fs', ':OpenGitFilesInVSplit<CR>', { noremap = true, silent = true })
