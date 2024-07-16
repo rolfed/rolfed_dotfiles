@@ -18,8 +18,6 @@ return {
             "typescript",
             "vim",
             "yaml",
-            "c",
-            "angular"
         }
     }
 }
