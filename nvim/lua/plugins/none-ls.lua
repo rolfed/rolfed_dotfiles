@@ -6,6 +6,8 @@ return {
     -- LSP sources using Lua scripting. Additionally, null-ls aims to
     -- streamline the configuration of general-purpose language servers
     -- and improve performance by eliminating the need for external processes.
+    -- List of formatters and linters: 
+    -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
     'nvimtools/none-ls.nvim',
     dependencies = {
         "nvimtools/none-ls-extras.nvim"
@@ -17,6 +19,7 @@ return {
                 null_ls.builtins.formatting.stylua,
                 null_ls.builtins.formatting.prettier,
                 require("none-ls.diagnostics.eslint_d"),
+                require("none-ls.diagnostics.cpplint"),
             }
         })
     end
