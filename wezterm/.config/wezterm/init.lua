@@ -1,0 +1,1 @@
+-- https://www.florianbellmann.com/blog/switch-from-tmux-to-wezterm
