@@ -6,6 +6,20 @@ This repository contains configuration files (dotfiles) for GNU Stow, Wezterm, a
 - Wezterm: A GPU-accelerated terminal emulator and multiplexer.
 - Neovim (Nvim): An extensible text editor that improves on Vim.
 
+## Install Dependencies
+
+### DAP
+1. delve for Go 
+```bash
+brew install delve
+```
+2. lldb-cod
+```bash
+brew install llvm
+ln -s $(brew --prefix)/opt/llvm/bin/lldb-vscode $(brew --prefix)/bin/
+```
+
+
 ## Installation Instructions
 To use these dotfiles on your system, follow these steps:
 

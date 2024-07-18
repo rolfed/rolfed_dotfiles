@@ -25,16 +25,16 @@ return {
         require("dap-go").setup({})
 
         -- C/C++ & Rust
-        dap.adapters.gdb = {
+        dap.adapters.lldb = {
             type = 'executable',
-            command = 'gdb',
-            args = { "-i", "dap" }
+            command = '/opt/homebrew/opt/llvm/bin/lldb-dap',
+            name = 'lldb'
         }
 
         dap.configurations.c = {
             {
                 name = "Launch",
-                type = "gdb",
+                type = "lldb",
                 request = "launch",
                 program = function()
                     return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
