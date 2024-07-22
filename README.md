@@ -16,7 +16,6 @@ brew install delve
 2. lldb-cod
 ```bash
 brew install llvm
-ln -s $(brew --prefix)/opt/llvm/bin/lldb-vscode $(brew --prefix)/bin/
 ```
 
 
@@ -34,7 +33,7 @@ GNU Stow will help you manage your dotfiles by creating symbolic links from your
 3. Run stow command to link configuration files
 ```bash
 cd ~/rolfed_dotfiles
-stow nvim wezterm
+stow nvim wezterm tmux
 ```
 
 4. Reload Configuration:
