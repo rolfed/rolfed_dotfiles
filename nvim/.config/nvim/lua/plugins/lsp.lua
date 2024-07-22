@@ -8,9 +8,17 @@ return {
     {
         "williamboman/mason-lspconfig.nvim",
         lazy = false,
-        opts = {
-            auto_install = true
-        }
+        config = function()
+            require("mason-lspconfig").setup({
+                -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
+                ensure_installed = {
+                    "lua_ls",
+                    "tsserver",
+                    "angularls",
+                    "clangd"
+                }
+            })
+        end
     },
     {
         "neovim/nvim-lspconfig",
@@ -26,7 +34,7 @@ return {
                 capabilities = capabilities
             })
 
-            -- FE Web Dev 
+            -- FE Web Dev
             lspconfig.tsserver.setup({
                 capabilities = capabilities
             })
@@ -54,7 +62,6 @@ return {
             lspconfig.gradle_ls.setup({
                 capabilities = capabilities
             })
-
         end
     }
 }
