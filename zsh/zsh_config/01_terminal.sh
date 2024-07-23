@@ -7,17 +7,18 @@ alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
 alias ll='ls -FGlAhp'                       # Preferred 'ls' implementation
 alias less='less -FSRXc'                    # Preferred 'less' implementation
 cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
-alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
-alias ..='cd ../'                           # Go back 1 directory level
-alias ...='cd ../../'                       # Go back 2 directory levels
-alias .3='cd ../../../'                     # Go back 3 directory levels
-alias .4='cd ../../../../'                  # Go back 4 directory levels
-alias .5='cd ../../../../../'               # Go back 5 directory levels
-alias .6='cd ../../../../../../'            # Go back 6 directory levels
+alias cd="z"
+alias cd..='z ../'                         # Go back 1 directory level (for fast typers)
+alias ..='z ../'                           # Go back 1 directory level
+alias ...='z ../../'                       # Go back 2 directory levels
+alias .3='z ../../../'                     # Go back 3 directory levels
+alias .4='z ../../../../'                  # Go back 4 directory levels
+alias .5='z ../../../../../'               # Go back 5 directory levels
+alias .6='z ../../../../../../'            # Go back 6 directory levels
 alias edit='nvim'                           # edit:         Opens any file in vim editor
 alias vim='nvim'			    			# vim	    	Opens nvim
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
-alias ~="cd ~"                              # ~:            Go Home
+alias ~="z ~"                              # ~:            Go Home
 alias c='clear'                             # c:            Clear terminal display
 alias which='type -a'                     # which:        Find executables
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
@@ -30,6 +31,7 @@ ql () { qlmanage -p "$*" >& /dev/null; }    # ql:           Opens any file in Ma
 alias DT='tee ~/Desktop/terminalOut.txt'    # DT:           Pipe content to file on MacOS Desktop
 alias mux='tmuxinator'                      # Tmuxinator alias
 alias npml="npm ls -g --depth=0 --link=true" # List all symbolic links for npm packages
+alias cat='bat --paging=never'
 
 #   lr:  Full Recursive Directory Listing
 #   ------------------------------------------

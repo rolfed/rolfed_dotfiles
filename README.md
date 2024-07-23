@@ -6,24 +6,17 @@ This repository contains configuration files (dotfiles) for GNU Stow, Wezterm, a
 - Wezterm: A GPU-accelerated terminal emulator and multiplexer.
 - Neovim (Nvim): An extensible text editor that improves on Vim.
 
-## Install Dependencies
-
-### Tmux
+## Setup
+### Install Homebrew
 ```bash
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-### DAP
-1. delve for Go 
+### Install inital brew packages
 ```bash
-brew install delve
+xargs brew install < ~/rolfed_dotfiles/homebrew/leaves.txt" 
 ```
-2. lldb-cod
-```bash
-brew install llvm
-```
-
-## Installation Instructions
+### Installation Instructions
 To use these dotfiles on your system, follow these steps:
 
 1. Clone the Repository:
@@ -39,6 +32,15 @@ GNU Stow will help you manage your dotfiles by creating symbolic links from your
 cd ~/rolfed_dotfiles
 stow nvim wezterm tmux zsh scripts
 ```
-
 4. Reload Configuration:
 Restart or reload Wezterm and Neovim to apply the new configurations.
+
+
+## Install Dependencies
+
+### Tmux Plugin Manager
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+
