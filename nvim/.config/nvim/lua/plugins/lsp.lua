@@ -16,6 +16,8 @@ return {
                     "tsserver",
                     "angularls",
                     "clangd",
+                    "bashls",
+                    "prettier",
                 }
             })
         end
@@ -76,6 +78,11 @@ return {
                 capabilities = capabilities
             })
             lspconfig.gradle_ls.setup({
+                capabilities = capabilities
+            })
+
+            -- Bash
+            lspconfig.bashls.setup({
                 capabilities = capabilities
             })
         end

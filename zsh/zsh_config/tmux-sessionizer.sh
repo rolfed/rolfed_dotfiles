@@ -1,2 +1,2 @@
-alias muxx="tmux neww  ~/.local/bin/tmuxinator-sessionizor.sh"
-alias muxl="~/.local/bin/mux-list-fzf.sh"
+alias muxn="tmux neww  ~/.local/bin/tmuxinator-sessionizor.sh"
+alias muxs="~/.local/bin/mux-list-fzf.sh"
