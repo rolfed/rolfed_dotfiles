@@ -1,0 +1,10 @@
+# /Users/drolfe/.config/tmuxinator/project.yml
+name: project
+root: <%= @settings["workspace"] %>
+
+windows:
+  - editor:
+      layout: 55ca,199x75,0,0{199x20,0,0,3,199x54,0,21,4}
+      panes:
+        - git status 
+        - vim 

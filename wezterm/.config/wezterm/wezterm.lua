@@ -102,7 +102,7 @@ config.keys = {
     -- handled by smart-splits
 
     -- Rotate Panes
-    { key = "Space", mods = "LEADER", action = act.RotatePanes "Clockwise", },
+    { key = "R", mods = "LEADER", action = act.RotatePanes "Clockwise", },
     { key = "0",     mods = "LEADER", action = act.PaneSelect, },
 
     -- Tab Management
