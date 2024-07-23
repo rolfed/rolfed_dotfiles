@@ -82,9 +82,9 @@ return {
             })
 
             -- Bash
-            lspconfig.bashls.setup({
-                capabilities = capabilities
-            })
+            -- lspconfig.bashls.setup({
+            --     capabilities = capabilities
+            -- })
         end
     }
 }
