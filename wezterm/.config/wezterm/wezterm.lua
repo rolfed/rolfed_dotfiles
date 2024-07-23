@@ -99,10 +99,7 @@ config.keys = {
     { key = "Enter", mods = "LEADER", action = act.ActivateCopyMode },
 
     -- Pane Navigation
-    { key = "h",     mods = "CTRL",   action = act.ActivatePaneDirection("Left"), },
-    { key = "j",     mods = "CTRL",   action = act.ActivatePaneDirection("Down"), },
-    { key = "k",     mods = "CTRL",   action = act.ActivatePaneDirection("Up"), },
-    { key = "l",     mods = "CTRL",   action = act.ActivatePaneDirection("Right"), },
+    -- handled by smart-slits
 
     -- Rotate Panes
     { key = "Space", mods = "LEADER", action = act.RotatePanes "Clockwise", },

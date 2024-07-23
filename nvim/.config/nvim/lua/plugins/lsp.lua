@@ -16,7 +16,6 @@ return {
                     "tsserver",
                     "angularls",
                     "clangd",
-                    "HTML"
                 }
             })
         end
