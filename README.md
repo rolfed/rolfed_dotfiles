@@ -8,6 +8,11 @@ This repository contains configuration files (dotfiles) for GNU Stow, Wezterm, a
 
 ## Install Dependencies
 
+### Tmux
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
 ### DAP
 1. delve for Go 
 ```bash
@@ -17,7 +22,6 @@ brew install delve
 ```bash
 brew install llvm
 ```
-
 
 ## Installation Instructions
 To use these dotfiles on your system, follow these steps:
