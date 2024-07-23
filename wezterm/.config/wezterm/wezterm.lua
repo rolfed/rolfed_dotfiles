@@ -21,7 +21,7 @@ local config = {}
 if wezterm.config_builder then config = wezterm.config_builder() end
 
 
-config.color_scheme = "duckbones"
+config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font_with_fallback({
     { family = "JetBrainsMono Nerd Font", scale = 1.0, weight = "Medium", },
     { family = "Source Code Pro",         scale = 1.0, },
@@ -88,7 +88,7 @@ end
 
 
 config.disable_default_key_bindings = true
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 2000 }
 
 config.keys = {
     -- Paste
