@@ -1,1 +1,1 @@
-alias muxn="tmux neww  ~/.local/bin/tmuxinator-sessionizor.sh"
+alias session="tmux neww  ~/.local/bin/tmuxinator-sessionizor.sh"
