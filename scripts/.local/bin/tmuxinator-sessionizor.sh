@@ -4,7 +4,7 @@
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/repos ~/repos/corvette -mindepth 1 -maxdepth 1 -type d | fzf --layout=reverse --border --info=inline --margin=8,20 --padding=1)
+    selected=$(find ~/repos ~/repos/corvette ~/repos/personal -mindepth 1 -maxdepth 1 -type d | fzf --layout=reverse --border --info=inline --margin=8,20 --padding=1)
 fi
 
 if [[ -z $selected ]]; then

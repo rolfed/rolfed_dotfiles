@@ -30,7 +30,7 @@ GNU Stow will help you manage your dotfiles by creating symbolic links from your
 3. Run stow command to link configuration files
 ```bash
 cd ~/rolfed_dotfiles
-stow nvim wezterm tmux zsh scripts
+stow nvim wezterm tmux zsh scripts starship
 ```
 4. Reload Configuration:
 Restart or reload Wezterm and Neovim to apply the new configurations.

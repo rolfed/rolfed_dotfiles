@@ -17,7 +17,6 @@ return {
                     "angularls",
                     "clangd",
                     "bashls",
-                    "prettier",
                 }
             })
         end
