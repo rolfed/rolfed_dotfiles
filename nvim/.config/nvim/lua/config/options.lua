@@ -37,3 +37,9 @@ vim.opt.colorcolumn = "80"
 vim.g.mapleader = ","
 
 vim.opt.foldlevelstart = 99
+
+-- Enable 24-bit color
+vim.opt.termguicolors = true
+
+-- Enable cursor line highlight
+vim.opt.cursorline = true

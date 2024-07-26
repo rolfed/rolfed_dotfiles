@@ -1,5 +1,4 @@
 require("config.remap")
 require("config.options")
 require("config.lazy-init")
-require("config.colorscheme")
 require("config.autoload")
