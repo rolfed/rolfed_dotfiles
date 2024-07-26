@@ -23,7 +23,7 @@ return {
     },
     {
         "neovim/nvim-lspconfig",
-        -- lazy = false,
+        event = { "BufReadPost" },
         config = function()
             -- Integrate LSP with autocomplete
             local capabilities = require('cmp_nvim_lsp').default_capabilities()

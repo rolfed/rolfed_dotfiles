@@ -3,6 +3,7 @@ return {
     -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#supported-languages
     "nvim-treesitter/nvim-treesitter",
     build = ':TSUpdate',
+    event = { "BufEnter" },
     config = function()
         local config = require('nvim-treesitter.configs')
         config.setup({
