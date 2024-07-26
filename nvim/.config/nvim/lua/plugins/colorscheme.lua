@@ -14,6 +14,7 @@ return {
                     telescope = true,
                     treesitter = true,
                     treesitter_context = true,
+                    symbols_outline = true,
                 }
             })
 

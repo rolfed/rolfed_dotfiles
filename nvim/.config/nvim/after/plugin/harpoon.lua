@@ -5,6 +5,6 @@ vim.keymap.set("n", "<leader>a", mark.add_file)
 vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
 -- Jump to next
-vim.keymap.set("n", "<C-m>", function() ui.nav_next() end)
+vim.keymap.set("n", "<C-N>", function() ui.nav_next() end)
 --- Jump to prevt
 vim.keymap.set("n", "<C-n>", function() ui.nav_prev() end)
