@@ -80,10 +80,7 @@ return {
                 capabilities = capabilities
             })
 
-            -- Bash
-            -- lspconfig.bashls.setup({
-            --     capabilities = capabilities
-            -- })
+            require('ufo').setup()
         end
     }
 }
