@@ -1,9 +1,9 @@
 local builtin = require('telescope.builtin')
 -- project files
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>fF', builtin.find_files, {})
 
 -- git specific files
-vim.keymap.set('n', '<leader>fF', builtin.git_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.git_files, {})
 
 -- find buffers
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -12,7 +12,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
 -- search help tags
-vim.keymap.set('n', '<C-h>', builtin.help_tags, {})
+vim.keymap.set('n', 'fh', builtin.help_tags, {})
 
 vim.api.nvim_create_user_command('OpenGitFilesInVSplit', function()
     vim.cmd('vsplit')                        -- Split the view vertically
