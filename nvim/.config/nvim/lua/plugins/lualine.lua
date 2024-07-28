@@ -13,9 +13,9 @@ return {
                 -- Match the branch name to the specified format
                 local user, ticket_number, description = string.match(branch, "^(%w+)/(%w+)%-(%d+)")
 
-                -- If the branch name matches the format, display {user}/{team}-{ticket_number}, otherwise display the full branch name
+                -- If the branch name matches the format, display {user}/{ticket_number}/{description}, otherwise display the full branch name
                 if ticket_number then
-                    return user .. "/" .. ticket_number .. "-" .. description
+                    return user .. "/" .. ticket_number .. "/" .. description
                 else
                     return branch
                 end
