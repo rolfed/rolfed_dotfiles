@@ -38,6 +38,15 @@ return {
                 return string.format("󱡅 %s/%d", current_mark, total_marks)
             end
 
+            local function show_macro_recording()
+                local recording_register = vim.fn.reg_recording()
+                if recording_register == "" then
+                    return ""
+                else
+                    return "Recording @" .. recording_register
+                end
+            end
+
             require("lualine").setup({
                 options = {
                     theme = "catppuccin",
@@ -51,6 +60,7 @@ return {
                         "diff",
                         "diagnostics",
                         harpoon_component,
+                        { "macro-recording", fmt = show_macro_recording },
                     },
                     lualine_c = {
                         { "filename", path = 1 },
