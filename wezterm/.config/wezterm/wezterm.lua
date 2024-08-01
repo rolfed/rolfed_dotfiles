@@ -23,7 +23,7 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font_with_fallback({
-    { family = "JetBrainsMono Nerd Font", scale = 1.0, weight = "Medium", },
+    { family = "JetBrainsMono Nerd Font", scale = 1.2, weight = "Medium", },
     { family = "Source Code Pro",         scale = 1.0, },
 })
 config.window_background_opacity = 0.95

@@ -15,7 +15,7 @@ return {
 
                 -- If the branch name matches the format, display {user}/{ticket_number}/{description}, otherwise display the full branch name
                 if ticket_number then
-                    return user .. "/" .. ticket_number .. "/" .. description
+                    return user .. "/" .. ticket_number .. "-" .. description
                 else
                     return branch
                 end
@@ -50,8 +50,9 @@ return {
             require("lualine").setup({
                 options = {
                     theme = "catppuccin",
+                    icons_enabled = true,
                     globalstatus = true,
-                    component_separators = { left = "", right = "" },
+                    component_separators = { left = "▎", right = "▎" },
                     section_separators = { left = "█", right = "█" },
                 },
                 sections = {
