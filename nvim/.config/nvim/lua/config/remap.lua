@@ -1,3 +1,4 @@
+vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = false })
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex);

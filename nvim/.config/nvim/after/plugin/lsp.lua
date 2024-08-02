@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('UserLspConfig', {}),
     callback = function(ev)
         -- Enable completion triggered by <c-x><c-o>
-        vim.bo[ev.buf].omnifunrc = 'v:lua.vim.lsp.omnifunc'
+        vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -27,13 +27,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 
         -- Buffer View
-        vim.keymap.set('n', '<leader>gK', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
         -- View Signigure
-        vim.keymap.set('n', '<leader>gk', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
 
         -- Refactor
-        vim.keymap.set('n', '<leader>rf', vim.lsp.buf.rename, opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
 
         -- Code Action
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})

@@ -1,0 +1,6 @@
+vim.keymap.set("n", "pd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {noremap=true})
+vim.keymap.set("n", "pg", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", {noremap=true})
+vim.keymap.set("n", "pi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", {noremap=true})
+vim.keymap.set("n", "pD", "<cmd>lua require('goto-preview').goto_declaration()<CR>", {noremap=true})
+vim.keymap.set("n", "cc", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
+vim.keymap.set("n", "pr", "<cmd>lua require('goto-preview').goto_preview_references()<CR>", {noremap=true})
