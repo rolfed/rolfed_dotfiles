@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
 
         -- View Signigure
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set('n', 'gk>', vim.lsp.buf.signature_help, opts)
 
         -- Refactor
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)

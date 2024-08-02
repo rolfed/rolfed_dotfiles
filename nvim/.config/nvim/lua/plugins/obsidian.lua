@@ -1,19 +1,9 @@
 return {
     "epwalsh/obsidian.nvim",
-    version = "*",
+    version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
     ft = "markdown",
     dependencies = {
-        "nvim-lua/plenary.nvim"
+        "nvim-lua/plenary.nvim",
     },
-    opts = {
-        {
-            name = "personal",
-            path = "~/repos/vault/personal"
-        },
-        {
-            name = "personal",
-            path = "~/repos/vault/personal"
-        },
-    }
 }
