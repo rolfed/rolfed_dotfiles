@@ -2,8 +2,8 @@ vim.opt.guicursor = ""
 
 -- Relative line numbers
 vim.opt.nu = true
-vim.opt.rnu = true
-vim.o.statuscolumn = "%s %l %r   "
+-- vim.opt.rnu = true
+-- vim.o.statuscolumn = "%s %l %r   "
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -44,3 +44,7 @@ vim.opt.termguicolors = true
 
 -- Enable cursor line highlight
 vim.opt.cursorline = true
+
+-- Required by obsidian, for more info visit
+-- https://github.com/epwalsh/obsidian.nvim#concealing-characters
+vim.opt.conceallevel = 1

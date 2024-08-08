@@ -14,7 +14,7 @@ return {
                 window = {
                     backdrop = 1,
                     width = 0.85,          -- width of the Zen window
-                    height = 1,            -- height of the Zen wind
+                    height = 0.75,            -- height of the Zen wind
                     options = {
                         signcolumn = "no", -- disable signcolumn
                         number = true,     -- disable number column
