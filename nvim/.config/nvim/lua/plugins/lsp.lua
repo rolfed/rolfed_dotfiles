@@ -25,40 +25,27 @@ return {
         event = { "BufReadPost" },
         config = function()
             -- Integrate LSP with autocomplete
-            local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local capabilities = require('cmp_nvim_lsp')
+                .default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
             local lspconfig = require("lspconfig")
 
-            -- LUA
-            lspconfig.lua_ls.setup({
-                capabilities = capabilities
-            })
+            local servers = {
+                lua_ls = {},
+                tsserver = {},
+                html = {},
+                tailwindcss = {},
+                eslint = {},
+                clangd = {},
+                gopls = {},
+                java_language_server = {},
+                gradle_ls = {}
+            }
 
-            -- FE Web Dev
-            lspconfig.tsserver.setup({
-                capabilities = capabilities
-            })
-            lspconfig.html.setup({
-                capabilities = capabilities
-            })
-
-            -- C and C++
-            lspconfig.clangd.setup({
-                capabilities = capabilities
-            })
-
-            -- Go
-            lspconfig.gopls.setup({
-                capabilities = capabilities
-            })
-
-            -- Java
-            lspconfig.java_language_server.setup({
-                capabilities = capabilities
-            })
-            lspconfig.gradle_ls.setup({
-                capabilities = capabilities
-            })
+            for server, opts in pairs(servers) do
+                opts.capabilities = capabilities
+                lspconfig[server].setup(opts)
+            end
         end
     }
 }
