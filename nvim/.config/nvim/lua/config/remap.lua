@@ -4,8 +4,8 @@ vim.g.maplocalleader = ","
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex);
 
 -- Move visually selected block up or down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "U", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "D", ":m '>+1<CR>gv=gv")
 
 -- bring bottom line up while keeping cursor in begining
 vim.keymap.set("n", "J", "mzJ`z")
