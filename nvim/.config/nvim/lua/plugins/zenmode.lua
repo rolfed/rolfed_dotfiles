@@ -13,7 +13,7 @@ return {
             require("zen-mode").setup({
                 window = {
                     backdrop = 1,
-                    width = 0.85,          -- width of the Zen window
+                    width = 0.75,          -- width of the Zen window
                     height = 0.75,            -- height of the Zen wind
                     options = {
                         signcolumn = "no", -- disable signcolumn
