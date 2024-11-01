@@ -48,3 +48,8 @@ vim.opt.cursorline = true
 -- Required by obsidian, for more info visit
 -- https://github.com/epwalsh/obsidian.nvim#concealing-characters
 vim.opt.conceallevel = 1
+
+-- Disable new line with comment
+vim.opt.formatoptions:remove { "c", "r", "o" }
+
+
