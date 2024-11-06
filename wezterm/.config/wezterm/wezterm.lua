@@ -123,8 +123,8 @@ config.keys = {
     { key = "x",     mods = "LEADER", action = act.CloseCurrentPane { confirm = false } },
 
     -- Workspace Management
-    { key = "J",     mods = "CTRL",   action = act.SwitchWorkspaceRelative(1) },
-    { key = "K",     mods = "CTRL",   action = act.SwitchWorkspaceRelative(-1) },
+    -- { key = "J",     mods = "CTRL",   action = act.SwitchWorkspaceRelative(1) },
+    -- { key = "K",     mods = "CTRL",   action = act.SwitchWorkspaceRelative(-1) },
     {
         key = "W",
         mods = "CTRL",
