@@ -17,25 +17,31 @@
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
-          # neovim - current issue https://github.com/wez/wezterm/issues/5990
+          # wezterm - current issue https://github.com/wez/wezterm/issues/5990
           bat
+          cargo
           eza
           fzf
           git
           neovim
+          nixd
+          obsidian
           raycast
           starship
           stow
           tmux
+          tmuxinator
           zoxide
-          cargo
-          nixd
       ]; 
 
       nix.nixPath = [ "nixpkg=${inputs.nixpkgs}" ];
 
       homebrew = {
         enable = true;
+        casks = [
+          "wezterm" # temporay reference current issue above
+          "hammerspoon" # ref https://www.hammerspoon.org/
+                ];
       }; 
 
       fonts.packages = with pkgs; [
