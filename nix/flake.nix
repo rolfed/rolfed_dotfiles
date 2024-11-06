@@ -32,12 +32,15 @@
           nixd
       ]; 
 
+      nix.nixPath = [ "nixpkg=${inputs.nixpkgs}" ];
+
       homebrew = {
         enable = true;
       }; 
+
       fonts.packages = with pkgs; [
           (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-        ];
+      ];
 
       system.activationScripts.applications.text = let
         env = pkgs.buildEnv {

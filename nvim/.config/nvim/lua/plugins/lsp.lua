@@ -38,7 +38,20 @@ return {
                 clangd = {},
                 gopls = {},
                 java_language_server = {},
-                gradle_ls = {}
+                gradle_ls = {},
+                nixd = {
+                    cmd = { "nixd" },
+                    settings = {
+                        nixd = {
+                            nixpkgs = {
+                                expr = "import <nixpkgs> { }"
+                            },
+                            formatting = {
+                                command = { "alejandra" }, -- or nixfmt or nixpkg-fmt
+                            }
+                        }
+                    }
+                }
             }
 
             for server, opts in pairs(servers) do
