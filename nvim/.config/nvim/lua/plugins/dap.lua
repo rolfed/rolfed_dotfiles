@@ -27,7 +27,7 @@ return {
         -- C/C++ & Rust
         dap.adapters.lldb = {
             type = 'executable',
-            command = '/opt/homebrew/opt/llvm/bin/lldb-dap',
+            command = '/usr/local/opt/llvm/bin/lldb-dap',
             name = 'lldb'
         }
 
