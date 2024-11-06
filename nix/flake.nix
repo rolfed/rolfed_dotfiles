@@ -29,6 +29,7 @@
           tmux
           zoxide
           cargo
+          nixd
       ]; 
 
       homebrew = {

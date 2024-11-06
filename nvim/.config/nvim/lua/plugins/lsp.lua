@@ -13,7 +13,7 @@ return {
                 -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
                 ensure_installed = {
                     "lua_ls",
-                    "tsserver",
+                    "ts_ls",
                     "clangd",
                     "bashls",
                 }
@@ -32,9 +32,9 @@ return {
 
             local servers = {
                 lua_ls = {},
-                tsserver = {},
+                ts_ls = {},
                 html = {},
-                eslint_d = {},
+                -- eslint_d = {},
                 clangd = {},
                 gopls = {},
                 java_language_server = {},
