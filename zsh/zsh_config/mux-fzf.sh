@@ -1,1 +1,1 @@
-alias proj="~/local/bin/tmux-fzf-start.sh"
+alias proj="~/.local/bin/tmux-fzf-start.sh"
