@@ -39,9 +39,16 @@
       homebrew = {
         enable = true;
         casks = [
-          "wezterm" # temporay reference current issue above
+          "wezterm" # temp reference current issue above
           "hammerspoon" # ref https://www.hammerspoon.org/
-                ];
+          "iina"
+        ];
+        brews = [
+          "mas" # mas tool to search apple store app ids to be used with masApps
+        ];
+        masApps = {
+        };
+        onActivation.cleanup = "zap";
       }; 
 
       fonts.packages = with pkgs; [
