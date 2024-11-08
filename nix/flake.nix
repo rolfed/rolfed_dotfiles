@@ -53,6 +53,9 @@
         #   "Yoink" = 457622435;
         # };
         onActivation.cleanup = "zap";
+        # On Nix update, update brew as well
+        onActivation.autoUpdate = true;
+        onActivation.upgrade = true;
       }; 
 
       fonts.packages = with pkgs; [
