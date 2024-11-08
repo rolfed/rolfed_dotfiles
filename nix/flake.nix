@@ -53,6 +53,7 @@
         #   "Yoink" = 457622435;
         # };
         onActivation.cleanup = "zap";
+
         # On Nix update, update brew as well
         onActivation.autoUpdate = true;
         onActivation.upgrade = true;
@@ -61,6 +62,11 @@
       fonts.packages = with pkgs; [
           (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       ];
+
+      # MacOs System defaults
+      system.defaults = {
+        dock.autohide = true;
+      };
 
       system.activationScripts.applications.text = let
         env = pkgs.buildEnv {
