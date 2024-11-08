@@ -42,4 +42,11 @@ Restart or reload Wezterm and Neovim to apply the new configurations.
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
+### Updates
+
+To update nix packages:
+```bash
+cd ~/rolfe-dotfiles/nix
+nix flake update
+```
 
