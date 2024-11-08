@@ -43,11 +43,15 @@
           "hammerspoon" # ref https://www.hammerspoon.org/
           "iina"
         ];
-        brews = [
-          "mas" # mas tool to search apple store app ids to be used with masApps
-        ];
-        masApps = {
-        };
+
+        # Not supported for my mac
+        # brews = [
+        #   "mas"
+        # ];
+        # masApps = {
+        #   "1Password" = 1333542190;
+        #   "Yoink" = 457622435;
+        # };
         onActivation.cleanup = "zap";
       }; 
 
