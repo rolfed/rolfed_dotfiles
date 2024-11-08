@@ -20,6 +20,8 @@
           # wezterm - current issue https://github.com/wez/wezterm/issues/5990
           bat
           cargo
+          docker
+          docker-compose 
           eza
           fzf
           git
@@ -39,9 +41,10 @@
       homebrew = {
         enable = true;
         casks = [
-          "wezterm" # temp reference current issue above
+          "brave-browser"
           "hammerspoon" # ref https://www.hammerspoon.org/
           "iina"
+          "wezterm" # temp reference current issue above
         ];
 
         # Not supported for my mac
@@ -86,10 +89,12 @@
       # MacOs System defaults
       system.defaults = {
         dock.autohide = true;
+        dock.show-recents = false;
         dock.persistent-apps = [
-            "${pkgs.wezterm}/Applicatations/Wezterm.app"
+            "${pkgs.obsidian}/Applications/Obsidian.app"
+            "/Applications/Brave\ Browser.app/"
+            "/Applications/WezTerm.app"
         ];
-        finder.FXPreferredVidwStyle = "clmv";
         loginwindow.GuestEnabled = false;
       };
 
