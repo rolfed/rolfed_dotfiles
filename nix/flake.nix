@@ -21,6 +21,7 @@
           bat
           cargo
           direnv
+          nix-direnv
           eza
           fzf
           git
