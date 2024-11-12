@@ -1,10 +1,11 @@
+--require("config/remap")
 local toggleFullScreen = require("config/toggle_fullscreen");
 local halfscreen = require("config/set_halfscreen");
 
 local winModal = hs.hotkey.modal.new("alt", "w")
 
 -- Bind the toggle full screen function to a hotkey
-hs.hotkey.bind({ "alt", "ctr" }, "z", toggleFullScreen.action)
+hs.hotkey.bind({ "alt" }, "z", toggleFullScreen.action)
 
 -- Half screen right 
 winModal:bind("", "l", function()

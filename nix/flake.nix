@@ -20,8 +20,7 @@
           # wezterm - current issue https://github.com/wez/wezterm/issues/5990
           bat
           cargo
-          docker
-          docker-compose 
+          devenv
           eza
           fzf
           git
