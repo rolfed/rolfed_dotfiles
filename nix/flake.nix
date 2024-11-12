@@ -18,6 +18,7 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
           # wezterm - current issue https://github.com/wez/wezterm/issues/5990
+          atuin
           bat
           cargo
           direnv
@@ -43,7 +44,6 @@
           "brave-browser"
           "hammerspoon" # ref https://www.hammerspoon.org/
           "iina"
-          "atuin"
           "wezterm" # temp reference current issue above
         ];
 
