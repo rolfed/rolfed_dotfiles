@@ -21,13 +21,15 @@
           bat
           cargo
           direnv
-          nix-direnv
           eza
           fzf
           git
           neovim
+          nix-direnv
           nixd
           obsidian
+          postman
+          python3
           raycast
           starship
           stow
@@ -45,6 +47,7 @@
           "hammerspoon" # ref https://www.hammerspoon.org/
           "iina"
           "wezterm" # temp reference current issue above
+          "tidal"
         ];
 
         # Not supported for my mac
@@ -91,9 +94,11 @@
         dock.autohide = true;
         dock.show-recents = false;
         dock.persistent-apps = [
-            "${pkgs.obsidian}/Applications/Obsidian.app"
             "/Applications/Brave\ Browser.app/"
             "/Applications/WezTerm.app"
+            "${pkgs.postman}/Applications/Postman.app"
+            "${pkgs.obsidian}/Applications/Obsidian.app"
+            "/Applications/Tidal.app"
         ];
         loginwindow.GuestEnabled = false;
       };
