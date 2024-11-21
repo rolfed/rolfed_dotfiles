@@ -1,10 +1,3 @@
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
--- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
--- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
--- vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
--- vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -39,7 +32,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
         -- Symbol
-        -- TODO how to pass in query
-        -- vim.keymap.set('n', '<leader>lr', vim.lsp.buf.workspace_symbol(), {})
+        -- vim.keymap.set('n', '<leader>lr', vim.lsp.buf.workspace_symbol(), opts)
     end,
 })
