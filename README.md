@@ -7,15 +7,9 @@ This repository contains configuration files (dotfiles) for GNU Stow, Wezterm, a
 - Neovim (Nvim): An extensible text editor that improves on Vim.
 
 ## Setup
-### Install Homebrew
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
+### Install Nix 
+[install](https://nixos.org/download/#download-nix)
 
-### Install inital brew packages
-```bash
-xargs brew install < ~/rolfed_dotfiles/homebrew/leaves.txt" 
-```
 ### Installation Instructions
 To use these dotfiles on your system, follow these steps:
 
@@ -32,9 +26,14 @@ GNU Stow will help you manage your dotfiles by creating symbolic links from your
 cd ~/rolfed_dotfiles
 stow nvim wezterm tmux zsh scripts starship
 ```
-4. Reload Configuration:
-Restart or reload Wezterm and Neovim to apply the new configurations.
 
+4. Install Darwin Flake
+```bash
+darwin-rebuild switch --flake ~/rolfed-dotfilex/nix
+```
+
+5. Reload Configuration:
+Restart or reload Wezterm and Neovim to apply the new configurations.
 
 ## Install Dependencies
 
@@ -43,4 +42,11 @@ Restart or reload Wezterm and Neovim to apply the new configurations.
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
+### Updates
+
+To update nix packages:
+```bash
+cd ~/rolfe-dotfiles/nix
+nix flake update
+```
 
