@@ -13,7 +13,8 @@ return {
                 "markdown_inline",
                 "typescript",
                 "css",
-                "c"
+                "c",
+                "http"
             },
             highlight = { enable = true },
             indent = { enable = true },
