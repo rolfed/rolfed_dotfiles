@@ -8,6 +8,8 @@ return {
   -- and improve performance by eliminating the need for external processes.
   -- List of formatters and linters:
   -- https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md
+  --
+  -- High level none ls creates a generatal lsp
   'nvimtools/none-ls.nvim',
   dependencies = {
     "nvimtools/none-ls-extras.nvim"
@@ -17,10 +19,12 @@ return {
     opts.sources = opts.sources or {}
     null_ls.setup({
       source = {
+        -- Documentation: https://github.com/nvimtools/none-ls.nvim/blob/main/doc/MAIN.md
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier,  -- Typescript, javascript, markdown ...
+        -- more infor for prettier: https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md#prettier
+        null_ls.builtins.formatting.alejandra, -- Nix
         null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.alejandra,
 
         require("none-ls.diagnostics.eslint_d"), -- requires none-ls-extras.nvim
         require("none-ls.diagnostics.cpplint"),
