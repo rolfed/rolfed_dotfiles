@@ -20,6 +20,7 @@
           # wezterm - current issue https://github.com/wez/wezterm/issues/5990
           bat
           cargo
+          cmake
           direnv
           eza
           fzf
