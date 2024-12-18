@@ -12,7 +12,7 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
 
 -- search help tags
-vim.keymap.set('n', 'fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 vim.api.nvim_create_user_command('OpenGitFilesInVSplit', function()
     vim.cmd('vsplit')                        -- Split the view vertically
