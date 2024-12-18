@@ -15,7 +15,6 @@ return {
         -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
         ensure_installed = {
           "bashls",
-          "black",
           "clangd",
           "denols",
           "lua_ls",
@@ -23,7 +22,6 @@ return {
           "tsserver",
           "ts_ls",
           "vtsls",
-          "markdown-oxide",
         }
       })
     end
@@ -152,10 +150,6 @@ return {
 
       local gopls = {}
 
-      local markdown_oxide = {
-        filetypes = { "markdown" },
-      }
-
       local servers = {
         clangd = clangd,
         gopls = {},
@@ -163,9 +157,9 @@ return {
         html = html,
         java_language_server = {},
         lua_ls = lua_ls,
-        markdown_oxide = markdown_oxide,
-        tsserver = tsserver,
-        ts_ls = ts_ls,
+        -- tsserver = tsserver,
+        -- ts_ls = ts_ls,
+        ts_ls = tsserver,
         vtsls = vtsls,
       }
 
