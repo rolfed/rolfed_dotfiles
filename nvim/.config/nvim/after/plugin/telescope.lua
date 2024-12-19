@@ -14,6 +14,7 @@ vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_gre
 -- search help tags
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
+-- Search git files and split screen
 vim.api.nvim_create_user_command('OpenGitFilesInVSplit', function()
     vim.cmd('vsplit')                        -- Split the view vertically
     require('telescope.builtin').git_files() -- Open Telescope to search Git files
