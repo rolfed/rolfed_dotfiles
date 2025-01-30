@@ -34,7 +34,7 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- Format file
 vim.keymap.set("n", "<leader>f", function()
-    vim.lsp.buf.format()
+  vim.lsp.buf.format()
 end)
 
 -- quick fix
@@ -53,11 +53,12 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
 
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
+  vim.cmd("so")
 end)
 
 -- MdEval
-vim.api.nvim_set_keymap('n', '<leader>c', "<cmd>lua require 'mdeval'.eval_code_block()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>c', "<cmd>lua require 'mdeval'.eval_code_block()<CR>",
+  { noremap = true, silent = true })
 
 -- Zen Mode
 vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>")

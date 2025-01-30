@@ -4,6 +4,9 @@ vim.opt.guicursor = ""
 vim.opt.nu = true
 -- vim.opt.rnu = true
 -- vim.o.statuscolumn = "%s %l %r   "
+--
+
+vim.opt.spell = true
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
