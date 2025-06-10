@@ -155,11 +155,10 @@ return {
         gopls = {},
         gradle_ls = gopls,
         html = html,
-        java_language_server = {},
+        -- java_language_server = {},
         lua_ls = lua_ls,
         -- tsserver = tsserver,
         -- ts_ls = ts_ls,
-        ts_ls = tsserver,
         vtsls = vtsls,
       }
 

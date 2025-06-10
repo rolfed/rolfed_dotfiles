@@ -13,6 +13,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Go to Definition
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 
+        -- Go to References
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
         -- Go To Declaraion
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
 
