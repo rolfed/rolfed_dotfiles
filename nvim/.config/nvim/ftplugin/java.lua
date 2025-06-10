@@ -1,7 +1,9 @@
 local home = os.getenv 'HOME'
 local workspace_path = home .. '/.local/share/nvim/jdtls-workspace'
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = workspace_path .. project_name
+local workspace_dir = workspace_path .. '-' .. project_name
+
+print('Workspace: ', workspace_dir)
 
 local status, jdtls = pcall(require, 'jdtls')
 if not status then
@@ -32,7 +34,7 @@ local config = {
     '-data',
     workspace_dir
   },
-  root_dir = require('jdtls.setup').find_root { 'git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' },
+  root_dir = require('jdtls.setup').find_root { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' },
   settings = {
     java = {
       signatureHelp = { enable = true },
@@ -55,10 +57,10 @@ local config = {
         enable = true
       }
     },
-    init_options = {
-      bundles = {},
-    }
   },
+  init_options = {
+    bundles = {},
+  }
 }
 
 jdtls.start_or_attach(config)
