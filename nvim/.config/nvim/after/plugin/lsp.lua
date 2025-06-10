@@ -9,29 +9,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Buffer local mappings.
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         local opts = { buffer = ev.buf }
-
-        -- Go to Definition
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-
-        -- Go To Declaraion
-        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-
-        -- Go To Implementation
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-
-        -- Buffer View
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-
-        -- View Signigure
-        vim.keymap.set('n', 'gk>', vim.lsp.buf.signature_help, opts)
-
-        -- Refactor
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-
-        -- Code Action
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
-
-        -- Symbol
-        -- vim.keymap.set('n', '<leader>lr', vim.lsp.buf.workspace_symbol(), opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts, { desc = "Go To Definition"})
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts, { desc = "Go To Decleration"})
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts, { desc = "Go To Implementation"})
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts, { desc = "View Signiture in hover"})
+        vim.keymap.set('n', 'gk>', vim.lsp.buf.signature_help, opts, { desc = "View signiture"})
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts, { desc = "Refactor"})
+        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = "Code Action"})
+        vim.keymap.set('n', 'gr', function ()
+          require('telescope.builtin').lsp.buf.references()
+        end, vim.tbl_deep_extend("force", opts or {}, { desc = "Go To References in Telescope"})
     end,
 })
