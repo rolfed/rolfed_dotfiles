@@ -11,6 +11,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     config = function()
+
       require("mason-lspconfig").setup({
         -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
         ensure_installed = {
@@ -22,6 +23,7 @@ return {
           "tsserver",
           "ts_ls",
           "vtsls",
+          "nvim-java",
           "jdtls"
         }
       })
@@ -31,6 +33,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost" },
     config = function()
+      require('java').setup() -- setup for java require before lspconfig
+
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
           .default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -151,12 +155,14 @@ return {
 
       local gopls = {}
 
+
       local servers = {
         clangd = clangd,
         gopls = {},
         gradle_ls = gopls,
         html = html,
         lua_ls = lua_ls,
+        ts_ls = tsserver,
         vtsls = vtsls,
       }
 
@@ -164,6 +170,8 @@ return {
         opts.capabilities = capabilities
         lspconfig[server].setup(opts)
       end
+
+      require('lspconfig').jdtls.setup({})
     end
   }
 }
