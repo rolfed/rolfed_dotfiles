@@ -18,6 +18,7 @@ return {
           "bashls",
           "clangd",
           "denols",
+          "gradle_ls",
           "lua_ls",
           "spellcheck",
           "tsserver",
@@ -156,7 +157,7 @@ return {
       local servers = {
         clangd = clangd,
         gopls = {},
-        gradle_ls = gopls,
+        gradle_ls = {},
         html = html,
         lua_ls = lua_ls,
         ts_ls = tsserver,
