@@ -11,6 +11,7 @@ return {
         "rcarriga/nvim-dap-ui",
         "nvim-neotest/nvim-nio",
         "leoluz/nvim-dap-go",
+        "nvim-java/nvim-java-dap",
     },
     opts = {
         handlers = {} -- loads defaults
@@ -23,6 +24,8 @@ return {
 
         -- Go
         require("dap-go").setup({})
+
+        -- Java debugging is handled by nvim-java-dap automatically
 
         -- C/C++ & Rust
         dap.adapters.lldb = {

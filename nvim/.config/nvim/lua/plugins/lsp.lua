@@ -18,13 +18,12 @@ return {
           "bashls",
           "clangd",
           "denols",
+          "gradle_ls",
           "lua_ls",
           "spellcheck",
           "tsserver",
           "ts_ls",
           "vtsls",
-          "nvim-java",
-          "jdtls"
         }
       })
     end
@@ -33,7 +32,6 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost" },
     config = function()
-      require('java').setup() -- setup for java require before lspconfig
 
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
@@ -159,7 +157,7 @@ return {
       local servers = {
         clangd = clangd,
         gopls = {},
-        gradle_ls = gopls,
+        gradle_ls = {},
         html = html,
         lua_ls = lua_ls,
         ts_ls = tsserver,
@@ -171,7 +169,7 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      require('lspconfig').jdtls.setup({})
+      -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
   }
 }
