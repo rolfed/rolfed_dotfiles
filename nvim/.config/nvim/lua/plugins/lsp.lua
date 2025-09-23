@@ -23,8 +23,6 @@ return {
           "tsserver",
           "ts_ls",
           "vtsls",
-          "nvim-java",
-          "jdtls"
         }
       })
     end
@@ -33,7 +31,6 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost" },
     config = function()
-      require('java').setup() -- setup for java require before lspconfig
 
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
@@ -171,7 +168,7 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      require('lspconfig').jdtls.setup({})
+      -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
   }
 }
