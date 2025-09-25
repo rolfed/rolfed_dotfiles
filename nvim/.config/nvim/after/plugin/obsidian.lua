@@ -1,7 +1,7 @@
-vim.keymap.set('n', '<leader>nn', '<cmd>ObsidianNew<cr>')
-vim.keymap.set('n', '<leader>nd', '<cmd>ObsidianDailes<cr>')
-vim.keymap.set('n', '<leader>ns', '<cmd>ObsidianSearch<cr>')
-vim.keymap.set('n', '<leader>nw', '<cmd>ObsidianWorkspace<cr>')
+vim.keymap.set('n', '<leader>nn', '<cmd>ObsidianNew<cr>', { desc = "New note" })
+vim.keymap.set('n', '<leader>nD', '<cmd>ObsidianDailies<cr>', { desc = "Daily notes" })
+vim.keymap.set('n', '<leader>ns', '<cmd>ObsidianSearch<cr>', { desc = "Search notes" })
+vim.keymap.set('n', '<leader>nw', '<cmd>ObsidianWorkspace<cr>', { desc = "Switch workspace" })
 
 require("obsidian").setup({
   workspaces = {
