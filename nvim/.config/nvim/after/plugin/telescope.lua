@@ -4,13 +4,19 @@ vim.keymap.set('n', '<leader>ff', builtin.git_files, { desc = "Find Git Tracked 
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Find buffers" })
 vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
   { desc = "Grep search" })
+
+-- Visual mode live grep with selected text
+vim.keymap.set('v', '<leader>fg', function()
+  vim.cmd('normal! "zy')  -- yank selection into register z
+  require('telescope.builtin').live_grep({ default_text = vim.fn.getreg('z') })
+end, { desc = 'Telescope live_grep visual selection' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help tags" })
 vim.api.nvim_create_user_command('OpenGitFilesInVSplit', function()
   vim.cmd('vsplit')   -- Split the view vertically
   builtin.git_files() -- Open Telescope to search Git files
 end, { nargs = 0, desc = "Search Git Tracked Files and split screen" })
-vim.api.nvim_set_keymap('n', '<leader>fs', ':OpenGitFilesInVSplit<CR>',
-  { noremap = true, silent = true, desc = "Find files and split screen" })
+vim.keymap.set('n', '<leader>fs', ':OpenGitFilesInVSplit<CR>',
+  { desc = "Find files and split screen" })
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word under Cursor" })
 vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search Git Commits" })
 vim.keymap.set("n", "<leader>gb", builtin.git_bcommits, { desc = "Search Git Commits for Buffer" })
@@ -22,4 +28,4 @@ vim.keymap.set("n", "<leader>/", function()
     previewer = false,
     layout_config = { width = 0.7 },
   }))
-end, { desc = "[/] Fuzzily search in current buffer" })
+end, { desc = "Search in current buffer" })

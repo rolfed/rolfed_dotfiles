@@ -1,1 +1,1 @@
-vim.api.nvim_set_keymap("n", "<leader>nc", ":Noice dismiss<CR>", {noremap=true})
+vim.keymap.set('n', '<leader>nd', '<cmd>Noice dismiss<CR>', { desc = \"Dismiss notifications\" })

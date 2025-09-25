@@ -1,1 +1,1 @@
-vim.keymap.set('n', '<leader>gf', vim.lsp.buf.format, {})
+-- Removing duplicate format function - already available as <leader>f in core remaps
