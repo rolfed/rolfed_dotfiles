@@ -3,17 +3,29 @@ vim.keymap.set('n', '<leader>nD', '<cmd>ObsidianDailies<cr>', { desc = "Daily no
 vim.keymap.set('n', '<leader>ns', '<cmd>ObsidianSearch<cr>', { desc = "Search notes" })
 vim.keymap.set('n', '<leader>nw', '<cmd>ObsidianWorkspace<cr>', { desc = "Switch workspace" })
 
-require("obsidian").setup({
-  workspaces = {
-    {
-      name = "Work",
-      path = "~/repos/vault/work"
-    },
+-- Function to check if work vault exists
+local function get_workspaces()
+  local workspaces = {
     {
       name = "Personal",
       path = "~/repos/vault/personal"
     }
-  },
+  }
+
+  -- Check if work vault exists before adding it
+  local work_vault_path = vim.fn.expand("~/repos/vault/work")
+  if vim.fn.isdirectory(work_vault_path) == 1 then
+    table.insert(workspaces, 1, {
+      name = "Work",
+      path = "~/repos/vault/work"
+    })
+  end
+
+  return workspaces
+end
+
+require("obsidian").setup({
+  workspaces = get_workspaces(),
   daily_notes = {
     -- Optional, if you keep daily notes in a separate directory.
     folder = "notes/dailies",
