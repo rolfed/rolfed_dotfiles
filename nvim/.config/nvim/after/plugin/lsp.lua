@@ -23,5 +23,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
       silent = true,
       desc = "Telescope: Search all references"
     })
+
+    -- Diagnostic keymaps for viewing errors/warnings
+    vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show line diagnostics" })
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+    vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
   end,
 })
