@@ -1,10 +1,10 @@
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = "Git status" })
 
--- Git blame keymaps
-vim.keymap.set('n', '<leader>gb', '<cmd>GitBlameToggle<CR>', { desc = "Toggle git blame" })
-vim.keymap.set('n', '<leader>gB', '<cmd>GitBlameOpenCommitURL<CR>', { desc = "Open commit in browser" })
-vim.keymap.set('n', '<leader>gc', '<cmd>GitBlameCopySHA<CR>', { desc = "Copy commit SHA" })
-vim.keymap.set('n', '<leader>gC', '<cmd>GitBlameCopyCommitURL<CR>', { desc = "Copy commit URL" })
+-- Git blame keymaps (using gbl prefix to avoid conflicts with Telescope git commands)
+vim.keymap.set('n', '<leader>gbt', '<cmd>GitBlameToggle<CR>', { desc = "Toggle git blame" })
+vim.keymap.set('n', '<leader>gbo', '<cmd>GitBlameOpenCommitURL<CR>', { desc = "Open commit in browser" })
+vim.keymap.set('n', '<leader>gbs', '<cmd>GitBlameCopySHA<CR>', { desc = "Copy commit SHA" })
+vim.keymap.set('n', '<leader>gbu', '<cmd>GitBlameCopyCommitURL<CR>', { desc = "Copy commit URL" })
 
 require('gitsigns').setup{
   on_attach = function(bufnr)

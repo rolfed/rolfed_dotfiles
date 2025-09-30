@@ -30,10 +30,15 @@ return {
       -- Git subgroups and commands
       { "<leader>gh", group = "GitHub" },
       { "<leader>gs", desc = "Git status" },
-      { "<leader>gb", desc = "Toggle git blame" },
-      { "<leader>gB", desc = "Open commit in browser" },
-      { "<leader>gc", desc = "Copy commit SHA" },
-      { "<leader>gC", desc = "Copy commit URL" },
+      { "<leader>gb", desc = "Search git commits (buffer)" },
+      { "<leader>gc", desc = "Search git commits (all)" },
+
+      -- Git blame subgroup
+      { "<leader>gbl", group = "Blame" },
+      { "<leader>gbt", desc = "Toggle git blame" },
+      { "<leader>gbo", desc = "Open commit in browser" },
+      { "<leader>gbs", desc = "Copy commit SHA" },
+      { "<leader>gbu", desc = "Copy commit URL" },
 
       -- LSP subgroups and commands
       { "<leader>la", group = "Actions" },
