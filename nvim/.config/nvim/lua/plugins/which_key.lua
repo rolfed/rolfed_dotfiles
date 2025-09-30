@@ -30,9 +30,22 @@ return {
       -- Git subgroups
       { "<leader>gh", group = "GitHub" },
 
-      -- LSP subgroups
+      -- LSP subgroups and commands
       { "<leader>la", group = "Actions" },
       { "<leader>lw", group = "Workspace" },
+      { "<leader>lwa", desc = "Add workspace folder" },
+      { "<leader>lwr", desc = "Remove workspace folder" },
+      { "<leader>lwl", desc = "List workspace folders" },
+      { "<leader>li", desc = "LSP info" },
+      { "<leader>lr", desc = "Restart LSP" },
+      { "<leader>ls", desc = "Document symbols" },
+      { "<leader>lS", desc = "Workspace symbols" },
+      { "<leader>lf", desc = "Format buffer/selection" },
+      { "<leader>lh", desc = "Toggle inlay hints" },
+
+      -- Code actions (dynamically mapped when LSP attaches)
+      { "<leader>rn", desc = "Rename symbol" },
+      { "<leader>ca", desc = "Code action" },
 
       -- Notes (Obsidian) subgroups
       { "<leader>nd", group = "Daily" },
@@ -50,8 +63,25 @@ return {
       { "<leader>ut", group = "Toggle" },
 
       -- Window management
-      { "<leader>wh", group = "Horizontal Split" },
-      { "<leader>wv", group = "Vertical Split" },
+      { "<leader>wv", desc = "Split window vertically" },
+      { "<leader>wh", desc = "Split window horizontally" },
+      { "<leader>we", desc = "Make splits equal size" },
+      { "<leader>wx", desc = "Close current split" },
+      { "<leader>wo", desc = "Close other splits" },
+      { "<leader>ww", desc = "Switch between splits" },
+      { "<leader>wj", desc = "Move to split below" },
+      { "<leader>wk", desc = "Move to split above" },
+      { "<leader>wl", desc = "Move to split right" },
+      { "<leader>wr", desc = "Rotate splits downward/right" },
+      { "<leader>wR", desc = "Rotate splits upward/left" },
+      { "<leader>wH", desc = "Move split to far left" },
+      { "<leader>wJ", desc = "Move split to bottom" },
+      { "<leader>wK", desc = "Move split to top" },
+      { "<leader>wL", desc = "Move split to far right" },
+      { "<leader>w<", desc = "Decrease width" },
+      { "<leader>w>", desc = "Increase width" },
+      { "<leader>w-", desc = "Decrease height" },
+      { "<leader>w+", desc = "Increase height" },
 
       -- Bracket mappings
       { "]", group = "Next" },
@@ -59,8 +89,15 @@ return {
       { "]d", desc = "Next diagnostic" },
       { "[d", desc = "Previous diagnostic" },
 
-      -- Goto mappings
+      -- Goto mappings (LSP)
       { "g", group = "Goto" },
+      { "gd", desc = "Go to definition" },
+      { "gD", desc = "Go to declaration" },
+      { "gi", desc = "Go to implementation" },
+      { "gt", desc = "Go to type definition" },
+      { "gr", desc = "Go to references" },
+      { "K", desc = "Hover documentation" },
+      { "<C-k>", desc = "Signature help" },
       { "gz", group = "Surround" },
 
       -- Mode-specific groups
