@@ -45,6 +45,8 @@ vim.keymap.set("n", "<leader>J", "<cmd>lprev<CR>zz", { desc = "Previous location
 
 -- find and replace in file
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search & replace word" })
+
+
 -- make current file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file executable", silent = true })
 

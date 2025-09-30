@@ -10,7 +10,8 @@ vim.keymap.set('v', '<leader>fg', function()
   vim.cmd('normal! "zy')  -- yank selection into register z
   require('telescope.builtin').live_grep({ default_text = vim.fn.getreg('z') })
 end, { desc = 'Telescope live_grep visual selection' })
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Search help tags" })
+vim.keymap.set('n', '<leader>fH', builtin.help_tags, { desc = "Search help tags" })
+vim.keymap.set('n', '<leader>fh', builtin.keymaps, { desc = "Find keymaps" })
 vim.api.nvim_create_user_command('OpenGitFilesInVSplit', function()
   vim.cmd('vsplit')   -- Split the view vertically
   builtin.git_files() -- Open Telescope to search Git files
@@ -20,7 +21,6 @@ vim.keymap.set('n', '<leader>fs', ':OpenGitFilesInVSplit<CR>',
 vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Find Word under Cursor" })
 vim.keymap.set("n", "<leader>gc", builtin.git_commits, { desc = "Search Git Commits" })
 vim.keymap.set("n", "<leader>gb", builtin.git_bcommits, { desc = "Search Git Commits for Buffer" })
-vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "Find Keymaps" })
 vim.keymap.set("n", "<leader>/", function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({

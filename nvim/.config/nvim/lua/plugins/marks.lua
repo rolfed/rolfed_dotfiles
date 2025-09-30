@@ -18,13 +18,27 @@
 --    dm=             Delete the bookmark under the cursor.
 return {
     "chentoast/marks.nvim",
+    event = "VeryLazy",
     config = function()
         require('marks').setup({
-            default_mappings = true,
-            mappings = {
-              next = "mj",
-              prev = "mk"
-            }
+            default_mappings = false, -- We'll set up custom mappings
+            builtin_marks = { ".", "<", ">", "^" },
+            cyclic = true,
+            force_write_shada = false,
+            refresh_interval = 250,
+            sign_priority = {
+                lower = 10,
+                upper = 15,
+                builtin = 8,
+                bookmark = 20
+            },
+            excluded_filetypes = {},
+            excluded_buftypes = { "nofile" },
+            bookmark_0 = {
+                sign = "⚑",
+                virt_text = "bookmark",
+                annotate = false,
+            },
         })
     end
 }
