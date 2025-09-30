@@ -27,8 +27,13 @@ return {
       { "<leader>w", group = "Window" },
       { "<leader>x", group = "Trouble/Diagnostics" },
 
-      -- Git subgroups
+      -- Git subgroups and commands
       { "<leader>gh", group = "GitHub" },
+      { "<leader>gs", desc = "Git status" },
+      { "<leader>gb", desc = "Toggle git blame" },
+      { "<leader>gB", desc = "Open commit in browser" },
+      { "<leader>gc", desc = "Copy commit SHA" },
+      { "<leader>gC", desc = "Copy commit URL" },
 
       -- LSP subgroups and commands
       { "<leader>la", group = "Actions" },
