@@ -63,3 +63,36 @@ vim.keymap.set('n', '<leader>c', function() require 'mdeval'.eval_code_block() e
 
 -- Zen Mode
 vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Toggle Zen Mode" })
+
+-- LSP (global - always available)
+vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", { desc = "LSP info" })
+
+-- Window Management
+-- Split windows
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>we", "<C-w>=", { desc = "Make splits equal size" })
+vim.keymap.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "Close current split" })
+vim.keymap.set("n", "<leader>wo", "<C-w>o", { desc = "Close other splits (only this)" })
+
+-- Navigate between splits (supplementary to smart-splits plugin)
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Move to split below" })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Move to split above" })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Move to split right" })
+vim.keymap.set("n", "<leader>ww", "<C-w>w", { desc = "Switch between splits" })
+
+-- Rotate windows
+vim.keymap.set("n", "<leader>wr", "<C-w>r", { desc = "Rotate splits downward/right" })
+vim.keymap.set("n", "<leader>wR", "<C-w>R", { desc = "Rotate splits upward/left" })
+
+-- Move splits
+vim.keymap.set("n", "<leader>wH", "<C-w>H", { desc = "Move split to far left" })
+vim.keymap.set("n", "<leader>wJ", "<C-w>J", { desc = "Move split to bottom" })
+vim.keymap.set("n", "<leader>wK", "<C-w>K", { desc = "Move split to top" })
+vim.keymap.set("n", "<leader>wL", "<C-w>L", { desc = "Move split to far right" })
+
+-- Resize splits
+vim.keymap.set("n", "<leader>w<", "<C-w>5<", { desc = "Decrease width" })
+vim.keymap.set("n", "<leader>w>", "<C-w>5>", { desc = "Increase width" })
+vim.keymap.set("n", "<leader>w-", "<C-w>5-", { desc = "Decrease height" })
+vim.keymap.set("n", "<leader>w+", "<C-w>5+", { desc = "Increase height" })
