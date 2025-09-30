@@ -1,4 +1,6 @@
 vim.keymap.set('n', '<leader>nn', '<cmd>ObsidianNew<cr>', { desc = "New note" })
+vim.keymap.set('n', '<leader>nt', '<cmd>ObsidianTemplate<cr>', { desc = "Insert template" })
+vim.keymap.set('n', '<leader>np', '<cmd>ObsidianNewFromTemplate<cr>', { desc = "New note from template" })
 vim.keymap.set('n', '<leader>nD', '<cmd>ObsidianDailies<cr>', { desc = "Daily notes" })
 vim.keymap.set('n', '<leader>ns', '<cmd>ObsidianSearch<cr>', { desc = "Search notes" })
 vim.keymap.set('n', '<leader>nw', '<cmd>ObsidianWorkspace<cr>', { desc = "Switch workspace" })
@@ -26,6 +28,19 @@ end
 
 require("obsidian").setup({
   workspaces = get_workspaces(),
+
+  -- Optional, set the log level for obsidian.nvim. This is an integer corresponding to one of the log levels defined by "vim.log.levels.*".
+  log_level = vim.log.levels.INFO,
+
+  -- Templates configuration
+  templates = {
+    folder = "templates",
+    date_format = "%Y-%m-%d",
+    time_format = "%H:%M",
+    -- A map for custom variables, the key should be the variable and the value a function
+    substitutions = {},
+  },
+
   daily_notes = {
     -- Optional, if you keep daily notes in a separate directory.
     folder = "notes/dailies",

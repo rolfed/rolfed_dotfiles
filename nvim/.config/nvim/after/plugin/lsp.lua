@@ -25,3 +25,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     })
   end,
 })
+
+-- Diagnostic keymaps (available globally, not just when LSP is attached)
+vim.keymap.set('n', '<leader>ee', vim.diagnostic.open_float, { desc = "Show error details" })
+vim.keymap.set('n', '<leader>en', vim.diagnostic.goto_next, { desc = "Next error" })
+vim.keymap.set('n', '<leader>ep', vim.diagnostic.goto_prev, { desc = "Previous error" })
+vim.keymap.set('n', '<leader>eq', vim.diagnostic.setloclist, { desc = "Local error list" })
+vim.keymap.set('n', '<leader>eQ', vim.diagnostic.setqflist, { desc = "Global error list" })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
