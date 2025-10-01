@@ -153,11 +153,18 @@ return {
 
       local gopls = {}
 
+      local gradle_ls = {
+        init_options = {
+          settings = {
+            gradleWrapperEnabled = true,
+          }
+        }
+      }
 
       local servers = {
         clangd = clangd,
         gopls = {},
-        gradle_ls = {},
+        gradle_ls = gradle_ls,
         html = html,
         lua_ls = lua_ls,
         ts_ls = tsserver,
