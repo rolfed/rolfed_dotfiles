@@ -11,7 +11,20 @@ local function get_jdtls_paths()
   local path = {}
   path.data_dir = vim.fn.stdpath('cache') .. '/nvim-jdtls'
 
-  local jdtls_install = require('mason-registry').get_package('jdtls'):get_install_path()
+  -- Check if jdtls is installed via Mason
+  local registry_ok, mason_registry = pcall(require, 'mason-registry')
+  if not registry_ok then
+    vim.notify('Mason registry not available', vim.log.levels.ERROR)
+    return nil
+  end
+
+  local jdtls_ok, jdtls_pkg = pcall(mason_registry.get_package, 'jdtls')
+  if not jdtls_ok then
+    vim.notify('JDTLS not installed. Run :Mason to install it.', vim.log.levels.WARN)
+    return nil
+  end
+
+  local jdtls_install = jdtls_pkg:get_install_path()
 
   path.java_agent = jdtls_install .. '/lombok.jar'
   path.launcher_jar = vim.fn.glob(jdtls_install .. '/plugins/org.eclipse.equinox.launcher_*.jar')
@@ -27,7 +40,7 @@ local function get_jdtls_paths()
   path.bundles = {}
 
   -- java-debug
-  local java_debug_ok, java_debug_pkg = pcall(require('mason-registry').get_package, 'java-debug-adapter')
+  local java_debug_ok, java_debug_pkg = pcall(mason_registry.get_package, 'java-debug-adapter')
   if java_debug_ok then
     local java_debug_install = java_debug_pkg:get_install_path()
     path.java_debug_bundle = vim.fn.glob(java_debug_install .. '/extension/server/com.microsoft.java.debug.plugin-*.jar', true)
@@ -37,7 +50,7 @@ local function get_jdtls_paths()
   end
 
   -- java-test
-  local java_test_ok, java_test_pkg = pcall(require('mason-registry').get_package, 'java-test')
+  local java_test_ok, java_test_pkg = pcall(mason_registry.get_package, 'java-test')
   if java_test_ok then
     local java_test_install = java_test_pkg:get_install_path()
     local java_test_bundle = vim.fn.glob(java_test_install .. '/extension/server/*.jar', true)
@@ -50,6 +63,12 @@ end
 -- Configuration
 local function get_jdtls_config()
   local path = get_jdtls_paths()
+
+  -- If jdtls is not installed, return early
+  if not path then
+    return nil
+  end
+
   local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
   if vim.fn.has('mac') == 1 then
@@ -139,4 +158,7 @@ local function get_jdtls_config()
 end
 
 -- Setup jdtls
-jdtls.start_or_attach(get_jdtls_config())
+local config = get_jdtls_config()
+if config then
+  jdtls.start_or_attach(config)
+end
