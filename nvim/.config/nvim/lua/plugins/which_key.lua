@@ -15,6 +15,7 @@ return {
       { "<leader>f", group = "Find/Format" },
       { "<leader>g", group = "Git" },
       { "<leader>h", group = "Harpoon" },
+      { "<leader>j", group = "Java" },
       { "<leader>l", group = "LSP" },
       { "<leader>m", group = "Marks" },
       { "<leader>n", group = "Notes" },
@@ -29,6 +30,18 @@ return {
 
       -- Git subgroups
       { "<leader>gh", group = "GitHub" },
+
+      -- Java subgroups and commands
+      { "<leader>jo", desc = "Organize imports" },
+      { "<leader>jv", desc = "Extract variable" },
+      { "<leader>jc", desc = "Extract constant" },
+      { "<leader>jm", desc = "Extract method" },
+      { "<leader>jt", group = "Test" },
+      { "<leader>jtc", desc = "Test class" },
+      { "<leader>jtn", desc = "Test nearest method" },
+      { "<leader>jd", group = "Debug" },
+      { "<leader>jdc", desc = "Debug class" },
+      { "<leader>jdn", desc = "Debug nearest method" },
 
       -- LSP subgroups and commands
       { "<leader>la", group = "Actions" },
