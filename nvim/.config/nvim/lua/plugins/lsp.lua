@@ -181,25 +181,22 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      -- Completely disable gradle_ls to prevent init_options errors
-      -- Override the default config to make it completely inert
-      lspconfig.gradle_ls.setup({
-        enabled = false,
-        autostart = false,
-        single_file_support = false,
-        filetypes = {},  -- Empty filetypes means it won't activate
-        cmd = { "true" },  -- Dummy command that does nothing
-        root_dir = function() return nil end,  -- Never find a root directory
-      })
+      -- Completely remove gradle_ls from lspconfig's configs
+      -- This prevents it from auto-starting on .groovy files
+      if lspconfig.util.available_servers()['gradle_ls'] then
+        lspconfig.configs.gradle_ls = nil
+      end
 
-      -- Also stop any gradle_ls that tries to start
+      -- Stop any gradle_ls that tries to start on groovy files
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "*",
+        pattern = { "groovy", "gradle" },
         callback = function()
-          local clients = vim.lsp.get_active_clients({ name = "gradle_ls" })
-          for _, client in ipairs(clients) do
-            vim.lsp.stop_client(client.id, true)
-          end
+          vim.schedule(function()
+            local clients = vim.lsp.get_clients({ name = "gradle_ls" })
+            for _, client in ipairs(clients) do
+              vim.lsp.stop_client(client.id, true)
+            end
+          end)
         end,
       })
 
