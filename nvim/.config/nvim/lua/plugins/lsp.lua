@@ -18,7 +18,7 @@ return {
           "bashls",
           "clangd",
           "denols",
-          "gradle_ls",
+          -- "gradle_ls",  -- Disabled: causes init_options errors, JDTLS handles Gradle
           "lua_ls",
           "spellcheck",
           "tsserver",
@@ -156,18 +156,20 @@ return {
 
       local gopls = {}
 
-      local gradle_ls = {
-        init_options = {
-          settings = {
-            gradleWrapperEnabled = true,
-          }
-        }
-      }
+      -- Gradle LS is disabled - JDTLS handles Gradle projects
+      -- Uncomment if you need standalone Gradle LS
+      -- local gradle_ls = {
+      --   init_options = {
+      --     settings = {
+      --       gradleWrapperEnabled = true,
+      --     }
+      --   }
+      -- }
 
       local servers = {
         clangd = clangd,
         gopls = {},
-        gradle_ls = gradle_ls,
+        -- gradle_ls = gradle_ls,  -- Disabled
         html = html,
         lua_ls = lua_ls,
         ts_ls = tsserver,
