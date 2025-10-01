@@ -181,22 +181,27 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      -- Completely disable gradle_ls to prevent errors
-      -- Override any auto-configuration
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "gradle", "groovy" },
-        callback = function()
-          vim.lsp.stop_client(vim.lsp.get_active_clients({ name = "gradle_ls" }))
-        end,
+      -- Completely disable gradle_ls to prevent init_options errors
+      -- Override the default config to make it completely inert
+      lspconfig.gradle_ls.setup({
+        enabled = false,
+        autostart = false,
+        single_file_support = false,
+        filetypes = {},  -- Empty filetypes means it won't activate
+        cmd = { "true" },  -- Dummy command that does nothing
+        root_dir = function() return nil end,  -- Never find a root directory
       })
 
-      -- Disable gradle_ls setup entirely
-      if lspconfig.gradle_ls then
-        lspconfig.gradle_ls.setup({
-          autostart = false,
-          single_file_support = false,
-        })
-      end
+      -- Also stop any gradle_ls that tries to start
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "*",
+        callback = function()
+          local clients = vim.lsp.get_active_clients({ name = "gradle_ls" })
+          for _, client in ipairs(clients) do
+            vim.lsp.stop_client(client.id, true)
+          end
+        end,
+      })
 
       -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
