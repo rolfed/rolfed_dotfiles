@@ -155,20 +155,9 @@ return {
 
       local gopls = {}
 
-      -- Gradle LS is disabled - JDTLS handles Gradle projects
-      -- Uncomment if you need standalone Gradle LS
-      -- local gradle_ls = {
-      --   init_options = {
-      --     settings = {
-      --       gradleWrapperEnabled = true,
-      --     }
-      --   }
-      -- }
-
       local servers = {
         clangd = clangd,
         gopls = {},
-        -- gradle_ls = gradle_ls,  -- Disabled
         html = html,
         lua_ls = lua_ls,
         ts_ls = tsserver,
