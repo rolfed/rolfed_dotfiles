@@ -88,6 +88,16 @@ return {
       { "[", group = "Previous" },
       { "]d", desc = "Next diagnostic" },
       { "[d", desc = "Previous diagnostic" },
+      { "]f", desc = "Next function start" },
+      { "[f", desc = "Previous function start" },
+      { "]F", desc = "Next function end" },
+      { "[F", desc = "Previous function end" },
+      { "]c", desc = "Next class start" },
+      { "[c", desc = "Previous class start" },
+      { "]C", desc = "Next class end" },
+      { "[C", desc = "Previous class end" },
+      { "]a", desc = "Next parameter" },
+      { "[a", desc = "Previous parameter" },
 
       -- Goto mappings (LSP)
       { "g", group = "Goto" },
