@@ -18,7 +18,6 @@ return {
           "bashls",
           "clangd",
           "denols",
-          -- "gradle_ls",  -- Disabled: causes init_options errors, JDTLS handles Gradle
           "lua_ls",
           "spellcheck",
           "tsserver",
@@ -181,26 +180,6 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      -- Completely remove gradle_ls from lspconfig's configs
-      -- This prevents it from auto-starting on .groovy files
-      if lspconfig.util.available_servers()['gradle_ls'] then
-        lspconfig.configs.gradle_ls = nil
-      end
-
-      -- Stop any gradle_ls that tries to start on groovy files
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "groovy", "gradle" },
-        callback = function()
-          vim.schedule(function()
-            local clients = vim.lsp.get_clients({ name = "gradle_ls" })
-            for _, client in ipairs(clients) do
-              vim.lsp.stop_client(client.id, true)
-            end
-          end)
-        end,
-      })
-
-      -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
   }
 }
