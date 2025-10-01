@@ -32,6 +32,9 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost" },
     config = function()
+      -- Suppress lspconfig deprecation warning until v3.0.0 migration
+      -- TODO: Migrate to vim.lsp.config when lspconfig v3.0.0 is released
+      vim.g.lspconfig_deprecation_warnings = false
 
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
