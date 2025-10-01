@@ -181,6 +181,11 @@ return {
         lspconfig[server].setup(opts)
       end
 
+      -- Explicitly disable gradle_ls to prevent auto-start
+      lspconfig.gradle_ls.setup({
+        autostart = false,
+      })
+
       -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
   }
