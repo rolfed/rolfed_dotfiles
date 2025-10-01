@@ -181,10 +181,22 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      -- Explicitly disable gradle_ls to prevent auto-start
-      lspconfig.gradle_ls.setup({
-        autostart = false,
+      -- Completely disable gradle_ls to prevent errors
+      -- Override any auto-configuration
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "gradle", "groovy" },
+        callback = function()
+          vim.lsp.stop_client(vim.lsp.get_active_clients({ name = "gradle_ls" }))
+        end,
       })
+
+      -- Disable gradle_ls setup entirely
+      if lspconfig.gradle_ls then
+        lspconfig.gradle_ls.setup({
+          autostart = false,
+          single_file_support = false,
+        })
+      end
 
       -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
