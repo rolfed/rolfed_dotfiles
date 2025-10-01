@@ -162,8 +162,23 @@ local function get_jdtls_config()
   return config
 end
 
--- Setup jdtls
-local config = get_jdtls_config()
-if config then
-  jdtls.start_or_attach(config)
+-- Setup jdtls with deferred loading to ensure Mason is ready
+local function setup_jdtls()
+  local config = get_jdtls_config()
+  if config then
+    jdtls.start_or_attach(config)
+  end
 end
+
+-- Defer JDTLS setup to ensure Mason registry is loaded
+vim.defer_fn(function()
+  -- Check if Mason is loaded
+  local registry_ok, mason_registry = pcall(require, 'mason-registry')
+  if registry_ok then
+    -- If Mason is ready, setup immediately
+    setup_jdtls()
+  else
+    -- Otherwise, wait for MasonToolsUpdate event or just try after a delay
+    vim.defer_fn(setup_jdtls, 100)
+  end
+end, 50)
