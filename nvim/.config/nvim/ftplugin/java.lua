@@ -1,5 +1,9 @@
 -- Java-specific settings and jdtls setup
-local jdtls = require('jdtls')
+local jdtls_ok, jdtls = pcall(require, 'jdtls')
+if not jdtls_ok then
+  vim.notify('nvim-jdtls plugin not found', vim.log.levels.ERROR)
+  return
+end
 
 -- Java-specific vim options
 vim.opt_local.shiftwidth = 4
@@ -11,19 +15,20 @@ local function get_jdtls_paths()
   local path = {}
   path.data_dir = vim.fn.stdpath('cache') .. '/nvim-jdtls'
 
-  -- Check if jdtls is installed via Mason
+  -- Check if Mason registry is available and loaded
   local registry_ok, mason_registry = pcall(require, 'mason-registry')
   if not registry_ok then
-    vim.notify('Mason registry not available', vim.log.levels.ERROR)
+    vim.notify('Mason registry not loaded yet', vim.log.levels.WARN)
     return nil
   end
 
-  local jdtls_ok, jdtls_pkg = pcall(mason_registry.get_package, 'jdtls')
-  if not jdtls_ok then
-    vim.notify('JDTLS not installed. Run :Mason to install it.', vim.log.levels.WARN)
+  -- Ensure Mason registry is refreshed
+  if not mason_registry.is_installed('jdtls') then
+    vim.notify('JDTLS not installed. Run :MasonInstall jdtls', vim.log.levels.WARN)
     return nil
   end
 
+  local jdtls_pkg = mason_registry.get_package('jdtls')
   local jdtls_install = jdtls_pkg:get_install_path()
 
   path.java_agent = jdtls_install .. '/lombok.jar'
