@@ -18,7 +18,6 @@ return {
           "bashls",
           "clangd",
           "denols",
-          "gradle_ls",
           "lua_ls",
           "spellcheck",
           "tsserver",
@@ -32,6 +31,9 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost" },
     config = function()
+      -- Suppress lspconfig deprecation warning until v3.0.0 migration
+      -- TODO: Migrate to vim.lsp.config when lspconfig v3.0.0 is released
+      vim.g.lspconfig_deprecation_warnings = false
 
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
@@ -153,11 +155,9 @@ return {
 
       local gopls = {}
 
-
       local servers = {
         clangd = clangd,
         gopls = {},
-        gradle_ls = {},
         html = html,
         lua_ls = lua_ls,
         ts_ls = tsserver,
@@ -169,7 +169,6 @@ return {
         lspconfig[server].setup(opts)
       end
 
-      -- Java LSP is handled by nvim-java plugin, not manual jdtls setup
     end
   }
 }
