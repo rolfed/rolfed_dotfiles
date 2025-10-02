@@ -109,6 +109,23 @@ scripts/.local/bin/            # Custom automation scripts
 3. **Review** logs: `~/.local/state/nvim/lsp.log`
 4. **Reinstall** problematic server via Mason
 
+### JDTLS Workspace Cache Issues
+If JDTLS shows errors like "Can't read root project location" or "does not resolve to a ICompilationUnit":
+
+```bash
+# Clean JDTLS workspace cache
+rm -rf ~/.local/share/nvim/jdtls-workspaces/[project-name]
+
+# Remove corrupted Eclipse metadata from project
+rm [project-path]/.project
+rm [project-path]/.classpath
+rm -rf [project-path]/.settings
+
+# Restart Neovim - JDTLS will regenerate clean metadata
+```
+
+**Root Cause**: Corrupted Gradle Buildship configuration in Eclipse metadata files
+
 ### Session Management
 1. **Create** sessions: `sesh connect [name]` or tmuxinator
 2. **Switch** sessions: `Ctrl-a s` or FZF integration
