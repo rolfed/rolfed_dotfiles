@@ -134,10 +134,11 @@ rm -rf [project-path]/.settings
 ## Recent Changes
 
 ### Java Development (Latest)
-- **Migration**: nvim-java → nvim-jdtls for direct control
-- **Features**: Full debugging, testing, refactoring support
-- **Keybindings**: Organized in `after/plugin/jdtls.lua`
-- **Dependencies**: lombok.jar automatically configured
+- **Setup**: Clean nvim-jdtls configuration via ftplugin
+- **Location**: `ftplugin/java.lua` (auto-loaded for Java files)
+- **Features**: LSP, refactoring (extract variable/constant/method), organize imports
+- **Keybindings**: `<leader>co` (organize imports), `<leader>cv/cc/cm` (extract)
+- **Dependencies**: JDTLS auto-installed via Mason, lombok.jar included
 
 ### Known Issues & Solutions
 - **JDTLS lombok.jar missing**: Download from projectlombok.org
