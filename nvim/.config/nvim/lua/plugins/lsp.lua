@@ -18,6 +18,7 @@ return {
           "bashls",
           "clangd",
           "denols",
+          "jdtls",  -- Java Language Server
           "lua_ls",
           "spellcheck",
           "tsserver",
