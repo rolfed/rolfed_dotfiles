@@ -18,6 +18,7 @@ return {
           "bashls",
           "clangd",
           "denols",
+          "jdtls",
           "lua_ls",
           "spellcheck",
           "tsserver",
