@@ -4,13 +4,8 @@
 
 local jdtls = require('jdtls')
 
--- Determine OS-specific configuration directory
-local os_config = 'config_mac'
-if vim.fn.has('linux') == 1 then
-  os_config = 'config_linux'
-elseif vim.fn.has('win32') == 1 then
-  os_config = 'config_win'
-end
+-- Configuration directory (Mason's JDTLS uses single 'config' directory)
+local os_config = 'config'
 
 -- Paths - JDTLS is in mason/share, not mason/packages
 local mason_root = vim.fn.stdpath('data') .. '/mason'
