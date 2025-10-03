@@ -12,9 +12,20 @@ elseif vim.fn.has('win32') == 1 then
   os_config = 'config_win'
 end
 
--- Paths
-local mason_path = vim.fn.stdpath('data') .. '/mason/packages'
-local jdtls_path = mason_path .. '/jdtls'
+-- Paths - JDTLS is in mason/share, not mason/packages
+local mason_root = vim.fn.stdpath('data') .. '/mason'
+local jdtls_path = mason_root .. '/share/jdtls'
+
+-- Check if JDTLS is installed
+if vim.fn.isdirectory(jdtls_path) == 0 then
+  vim.notify(
+    'jdtls not found. Install it with :MasonInstall jdtls',
+    vim.log.levels.ERROR,
+    { title = 'nvim-jdtls' }
+  )
+  return
+end
+
 local lombok_path = jdtls_path .. '/lombok.jar'
 
 -- Workspace directory: separate workspace per project
@@ -25,15 +36,16 @@ local workspace_dir = vim.fn.stdpath('data') .. '/jdtls-workspaces/' .. project_
 -- Find java-test and java-debug-adapter bundles installed by Mason
 local function get_bundles()
   local bundles = {}
+  local packages_path = mason_root .. '/packages'
 
   -- Java Debug Adapter
-  local java_debug_path = mason_path .. '/java-debug-adapter/extension/server'
+  local java_debug_path = packages_path .. '/java-debug-adapter/extension/server'
   if vim.fn.isdirectory(java_debug_path) == 1 then
     vim.list_extend(bundles, vim.split(vim.fn.glob(java_debug_path .. '/com.microsoft.java.debug.plugin-*.jar'), '\n'))
   end
 
   -- Java Test Runner
-  local java_test_path = mason_path .. '/java-test/extension/server'
+  local java_test_path = packages_path .. '/java-test/extension/server'
   if vim.fn.isdirectory(java_test_path) == 1 then
     vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. '/*.jar'), '\n'))
   end
