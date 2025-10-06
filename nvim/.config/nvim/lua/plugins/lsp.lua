@@ -131,11 +131,6 @@ return {
         root_dir = root_pattern('go.mod', 'go.work', '.git'),
       }
 
-      vim.lsp.config.jdtls = {
-        -- jdtls is configured via ftplugin/java.lua
-        -- This entry prevents the "does not have a configuration" warning
-      }
-
       vim.lsp.config.markdown_oxide = {
         cmd = { 'markdown-oxide' },
         filetypes = { 'markdown' },
@@ -163,7 +158,6 @@ return {
       vim.lsp.enable('markdown_oxide')
       vim.lsp.enable('somesass_ls')
       vim.lsp.enable('bashls')
-      -- Note: jdtls is enabled via ftplugin/java.lua
     end
   }
 }
