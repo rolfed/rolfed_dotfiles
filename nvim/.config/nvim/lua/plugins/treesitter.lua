@@ -18,8 +18,7 @@ return {
                     "typescript",
                     "css",
                     "c",
-                    "http",
-                    "java"
+                    "http"
                 },
                 highlight = { enable = true },
                 indent = { enable = true },

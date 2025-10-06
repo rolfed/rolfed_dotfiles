@@ -31,16 +31,10 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost" },
     config = function()
-      -- Suppress lspconfig deprecation warning until v3.0.0 migration
-      -- TODO: Migrate to vim.lsp.config when lspconfig v3.0.0 is released
-      vim.g.lspconfig_deprecation_warnings = false
-
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
           .default_capabilities(vim.lsp.protocol.make_client_capabilities())
       capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-      local lspconfig = require("lspconfig")
 
       -- Function to organize ts imports
       local function organize_imports()
@@ -52,9 +46,6 @@ return {
         vim.lsp.buf.execute_command(params)
       end
 
-
-      local lua_ls = {};
-
       local typescriptFileTypes = {
         "javascript",
         "javascriptreact",
@@ -64,29 +55,38 @@ return {
         "typescript.tsx",
       }
 
-      local tsserver = {
-        enabled = false, --disable to priotitize vstls
+      -- Helper function to find root directory
+      local function root_pattern(...)
+        local patterns = {...}
+        return function(fname)
+          for _, pattern in ipairs(patterns) do
+            local match = vim.fs.find(pattern, {
+              upward = true,
+              path = vim.fs.dirname(fname),
+            })[1]
+            if match then
+              return vim.fs.dirname(match)
+            end
+          end
+        end
+      end
+
+      -- Configure LSP servers using vim.lsp.config
+      vim.lsp.config('*', {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config.lua_ls = {}
+
+      vim.lsp.config.ts_ls = {
+        enabled = false, -- disable to prioritize vtsls
         filetypes = typescriptFileTypes,
-        on_attach = on_attach,
-        root_dir = lspconfig.util.root_pattern("package.json", "deno.json", "deno.jsonc"),
-        single_file_support = false,
-        commands = {
-          OrganizeImports = {
-            organize_imports,
-            description = "Organize TS Imports"
-          }
-        }
       }
 
-      local ts_ls = {
-        enabled = false, --disable to priotitize vstls
-        filetypes = typescriptFileTypes
-      }
-
-      local vtsls = {
-        -- explicitly add default filetypes, so that we can extend
-        -- them in related extras
+      vim.lsp.config.vtsls = {
         filetypes = typescriptFileTypes,
+        cmd = { 'vtsls', '--stdio' },
+        root_dir = root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
         commands = {
           OrganizeImports = {
             organize_imports,
@@ -95,9 +95,7 @@ return {
         },
         settings = {
           complete_function_calls = true,
-          vtsls = {
-
-          },
+          vtsls = {},
           typescript = {
             updateImportsOnFileMove = { enabled = "always" },
             suggest = {
@@ -113,62 +111,53 @@ return {
             }
           },
         },
-        opts = function()
-          return {
-            tsserver = function()
-              -- Disable tsserver
-              return true
-            end,
-            ts_ls = function()
-              -- Disable tsserver
-              return true
-            end,
-          }
-        end
       }
 
-
-      local html = {
-        fileTypes = {
-          "html",
-          "templ"
-        },
+      vim.lsp.config.html = {
+        filetypes = { "html", "templ" },
+        cmd = { 'vscode-html-language-server', '--stdio' },
+        root_dir = root_pattern('.git'),
         single_file_support = true,
       }
 
-      local clangd = {
-        filetypes = {
-          "c",
-          "cpp",
-        },
-        opts = function()
-          return {
-            offsetEncoding = { "utf-8" },
-            textDocument = {
-              completion = {
-                editNearCursor = true
-              }
-            }
-          }
-        end
+      vim.lsp.config.clangd = {
+        filetypes = { "c", "cpp" },
+        cmd = { 'clangd' },
+        root_dir = root_pattern('compile_commands.json', '.git'),
       }
 
-      local gopls = {}
-
-      local servers = {
-        clangd = clangd,
-        gopls = {},
-        html = html,
-        lua_ls = lua_ls,
-        ts_ls = tsserver,
-        vtsls = vtsls,
+      vim.lsp.config.gopls = {
+        cmd = { 'gopls' },
+        root_dir = root_pattern('go.mod', 'go.work', '.git'),
       }
 
-      for server, opts in pairs(servers) do
-        opts.capabilities = capabilities
-        lspconfig[server].setup(opts)
-      end
+      vim.lsp.config.markdown_oxide = {
+        cmd = { 'markdown-oxide' },
+        filetypes = { 'markdown' },
+        root_dir = root_pattern('.git', '.obsidian'),
+      }
 
+      vim.lsp.config.somesass_ls = {
+        cmd = { 'some-sass-language-server', '--stdio' },
+        filetypes = { 'scss', 'sass' },
+        root_dir = root_pattern('.git'),
+      }
+
+      vim.lsp.config.bashls = {
+        cmd = { 'bash-language-server', 'start' },
+        filetypes = { 'sh', 'bash' },
+        root_dir = root_pattern('.git'),
+      }
+
+      -- Enable LSP servers
+      vim.lsp.enable('lua_ls')
+      vim.lsp.enable('vtsls')
+      vim.lsp.enable('html')
+      vim.lsp.enable('clangd')
+      vim.lsp.enable('gopls')
+      vim.lsp.enable('markdown_oxide')
+      vim.lsp.enable('somesass_ls')
+      vim.lsp.enable('bashls')
     end
   }
 }
