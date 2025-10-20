@@ -19,9 +19,6 @@ return {
           "clangd",
           "denols",
           "lua_ls",
-          "spellcheck",
-          "tsserver",
-          "ts_ls",
           "vtsls",
         }
       })
@@ -59,6 +56,11 @@ return {
       local function root_pattern(...)
         local patterns = {...}
         return function(fname)
+          -- Handle buffer numbers or non-string inputs
+          if type(fname) ~= 'string' or fname == '' then
+            return nil
+          end
+
           for _, pattern in ipairs(patterns) do
             local match = vim.fs.find(pattern, {
               upward = true,
@@ -77,11 +79,6 @@ return {
       })
 
       vim.lsp.config.lua_ls = {}
-
-      vim.lsp.config.ts_ls = {
-        enabled = false, -- disable to prioritize vtsls
-        filetypes = typescriptFileTypes,
-      }
 
       vim.lsp.config.vtsls = {
         filetypes = typescriptFileTypes,
