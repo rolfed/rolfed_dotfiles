@@ -152,8 +152,9 @@ return {
       -- Disable ts_ls — vtsls handles TypeScript
       vim.lsp.enable('ts_ls', false)
 
-      -- Restrict denols to Deno projects only (deno.json or deno.jsonc present)
+      -- Restrict denols to Deno projects only (override built-in root_markers that include .git)
       vim.lsp.config.denols = {
+        root_markers = { 'deno.json', 'deno.jsonc' },
         root_dir = root_pattern('deno.json', 'deno.jsonc'),
       }
 
