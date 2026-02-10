@@ -1,182 +1,53 @@
-# Claude Dotfiles Guide
+# CLAUDE.md
 
-## Quick Commands
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-### Essential Operations
-```bash
-# Apply dotfiles
-stow nvim wezterm tmux zsh scripts starship hammerspoon obsidian
+## Repository Overview
 
-# Update system packages
-cd nix && darwin-rebuild switch --flake .
+Personal dotfiles ("Dotfiles 2.0") for a macOS development environment. Configs for ZSH, Tmux, Emacs, Vim/Neovim, Yabai (tiling WM), SKHD (keyboard daemon), and Alacritty.
 
-# Update plugins
-nvim: :Lazy update
-tmux: Prefix + U
-```
-
-### Validation
-```bash
-# Syntax checks
-lua -c "dofile('nvim/.config/nvim/init.lua')"
-shellcheck scripts/.local/bin/*.sh
-
-# Rollback last change
-git checkout HEAD~1 -- [file]
-```
-
-## High-Impact Files (Always backup before changing)
-- `nvim/.config/nvim/init.lua` - Neovim entry point
-- `zsh/.zshrc` - Shell configuration
-- `nix/flake.nix` - System package management
-- `tmux/.tmux.conf` - Terminal multiplexer
-
-## Architecture Overview
-
-### Core Technologies
-- **Nix Darwin**: System packages + Homebrew integration
-- **Stow**: Symlink management for dotfiles
-- **Neovim**: 28+ plugins via Lazy.nvim
-- **Tmux**: Session management with Sesh integration
-- **WezTerm**: GPU-accelerated terminal with workspace management
-
-### Key Integrations
-- **Tmux ↔ Neovim**: Seamless navigation (vim-tmux-navigator)
-- **FZF**: File/session finding throughout the system
-- **Git**: Status in tmux bar, Neovim fugitive, starship prompt
-- **Mason**: LSP/DAP/formatter management in Neovim
-
-## Development Environment
-
-### Supported Languages
-- **Java**: Full JDTLS with debugging, testing, refactoring
-- **TypeScript/JS**: VTSLS with import organization
-- **Go**: LSP + DAP debugging
-- **Python**: Pyenv integration + LSP
-- **C/C++**: Clangd + LLDB debugging
-- **Lua**: Full LSP for Neovim configuration
-- **Bash/Shell**: LSP + linting
-
-### Key Tools
-- **LSP Servers**: bashls, clangd, gradle_ls, lua_ls, vtsls
-- **Debugging**: nvim-dap (Go, Java, C/C++, Rust)
-- **Testing**: Integrated test runners for Java
-- **Formatters**: Language-specific via Mason
-
-## File Locations
-
-### Neovim Structure
-```
-nvim/.config/nvim/
-├── init.lua                    # Entry point
-├── lua/config/                 # Core configuration
-├── lua/plugins/               # 28 plugin files
-├── after/plugin/              # Post-load configurations
-└── ftplugin/java.lua          # Java-specific JDTLS setup
-```
-
-### Shell Configuration
-```
-zsh/
-├── .zshrc                     # Main shell config
-└── zsh_config/               # 15 modular shell scripts
-    ├── 01_terminal.sh → 14_sesh.sh
-    ├── fzf.sh
-    └── tmux-sessionizer.sh
-```
-
-### System Management
-```
-nix/
-├── flake.nix                  # System packages + settings
-└── flake.lock                 # Locked dependencies
-
-scripts/.local/bin/            # Custom automation scripts
-```
-
-## Common Patterns
-
-### Adding New Tool
-1. **Read** existing similar configurations
-2. **Add** to appropriate location (plugins/, nix/flake.nix, etc.)
-3. **Test** syntax: `lua -c "dofile('file.lua')"`
-4. **Apply**: `stow` or `darwin-rebuild switch --flake nix`
-5. **Commit** with clear description
-
-### Troubleshooting LSP Issues
-1. **Check** `:LspInfo` in Neovim
-2. **Verify** Mason installation: `:Mason`
-3. **Review** logs: `~/.local/state/nvim/lsp.log`
-4. **Reinstall** problematic server via Mason
-
-### JDTLS Workspace Cache Issues
-If JDTLS shows errors like "Can't read root project location" or "does not resolve to a ICompilationUnit":
+## Validation
 
 ```bash
-# Clean JDTLS workspace cache
-rm -rf ~/.local/share/nvim/jdtls-workspaces/[project-name]
+# Check shell scripts for errors
+shellcheck zsh_setup/config/*.sh
 
-# Remove corrupted Eclipse metadata from project
-rm [project-path]/.project
-rm [project-path]/.classpath
-rm -rf [project-path]/.settings
-
-# Restart Neovim - JDTLS will regenerate clean metadata
+# Validate Emacs config loads
+emacs --batch -l emacs/init.el
 ```
 
-**Root Cause**: Corrupted Gradle Buildship configuration in Eclipse metadata files
+## Architecture
 
-### Session Management
-1. **Create** sessions: `sesh connect [name]` or tmuxinator
-2. **Switch** sessions: `Ctrl-a s` or FZF integration
-3. **Save** layouts: tmux-resurrect (automatic)
+### ZSH Modular Config System
 
-## Recent Changes
+The main entry point is `zsh_setup/.zshrc`, which sources `zsh_setup/.my_zsh_setup.sh`. That script sources all numbered config files in `zsh_setup/config/` (`01_terminal.sh` through `13_fzf_config.sh`). Each module handles a specific domain (environment, networking, tools, languages, etc.). To add new config, create a new numbered file in `zsh_setup/config/` and add a source line in `.my_zsh_setup.sh`.
 
-### Java Development (Latest)
-- **Setup**: Clean nvim-jdtls configuration via ftplugin
-- **Location**: `ftplugin/java.lua` (auto-loaded for Java files)
-- **Features**: LSP, refactoring (extract variable/constant/method), organize imports
-- **Keybindings**: `<leader>co` (organize imports), `<leader>cv/cc/cm` (extract)
-- **Dependencies**: JDTLS auto-installed via Mason, lombok.jar included
+Key dependencies: Oh-My-ZSH, Powerlevel10k prompt, FZF with fd.
 
-### Known Issues & Solutions
-- **JDTLS lombok.jar missing**: Download from projectlombok.org
-- **Gradle language server permissions**: Add to Mason ensure_installed
-- **HTML LSP CSS errors**: Known upstream issue, harmless
+### Emacs Literate Config
 
-## Quick Recovery
+`emacs/init.el` bootstraps straight.el and loads `emacs/config.org`, which contains the full configuration in Org-mode code blocks. Edit `config.org` for Emacs changes, not `init.el`.
 
-### If Something Breaks
-```bash
-# Rollback specific file
-git checkout HEAD~1 -- [broken-file]
+### Theming
 
-# Rollback entire commit
-git reset --hard HEAD~1
+Catppuccin is used consistently across Tmux, Emacs, and the tmux-sessionizer script. Maintain this consistency when modifying theme-related config.
 
-# Restore from backup (if created)
-cp [file].backup [file]
-```
+### Vim Keybindings Everywhere
 
-### Emergency Fallback
-```bash
-# Minimal working environment
-export PATH="/usr/bin:/bin"
-/bin/bash --login
-```
+Vim-style bindings are configured in ZSH (vi-mode), Tmux (vi-mode copy), Emacs (Evil mode), SKHD (cmd+hjkl navigation), and IdeaVim (`.ideavimrc`).
 
-## Extension Points
+### Tmux Session Management
 
-### Adding New Language Support
-1. **LSP**: Add server to `lua/plugins/lsp.lua` ensure_installed
-2. **Syntax**: Treesitter handles most languages automatically
-3. **Debugging**: Configure in `lua/plugins/dap.lua`
-4. **Formatting**: Add to Mason ensure_installed
+Custom scripts in `bin/.local/scritps/` provide FZF-based tmux session creation and switching. `tmux-sessionizer.sh` searches `~/projects/*`, `~/forks`, `~/study` for project directories and auto-creates tmux sessions with nvim and shell windows.
 
-### Adding New Shell Tools
-1. **Nix**: Add to `nix/flake.nix` systemPackages
-2. **Shell integration**: Add module in `zsh/zsh_config/`
-3. **Aliases**: Include in appropriate numbered module
+Tmux uses TPM (Tmux Plugin Manager) with plugins for vim-tmux-navigator, resurrect, continuum, and catppuccin theme.
 
-This guide prioritizes **fast iteration** and **easy recovery** over complex validation. The goal is to make changes quickly and safely, with simple rollback when needed.
+### macOS Window Management
+
+Yabai (BSP tiling WM) and SKHD (hotkey daemon) work together. `yabai/.yabairc` defines layout/gaps/opacity. `skhd/skhdrc` defines keyboard shortcuts using cmd+hjkl for window focus and shift+cmd+hjkl for window swapping.
+
+## Key Bindings Reference
+
+- **Tmux prefix**: `Ctrl-a`
+- **SKHD window focus**: `cmd+hjkl`
+- **Vim escape remap**: `kj` (in vim_setup and ideavimrc)
