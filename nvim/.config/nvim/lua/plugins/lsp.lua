@@ -95,6 +95,9 @@ return {
           vtsls = {},
           typescript = {
             updateImportsOnFileMove = { enabled = "always" },
+            preferences = {
+              importModuleSpecifierEnding = "minimal",
+            },
             suggest = {
               completeFunctionCalls = true
             },
