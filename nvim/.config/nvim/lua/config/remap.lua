@@ -33,9 +33,35 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Ex mode" })
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Tmux sessionizer" })
 
 -- Format file
-vim.keymap.set("n", "<leader>f", function()
+vim.keymap.set("n", "<leader>fA", function()
   vim.lsp.buf.format()
-end, { desc = "Format file" })
+end, { desc = "Format entire file" })
+
+-- Format current function
+vim.keymap.set("n", "<leader>ff", function()
+  local ts_utils = require('nvim-treesitter.ts_utils')
+  local node = ts_utils.get_node_at_cursor()
+
+  -- Traverse up to find function node
+  while node do
+    local node_type = node:type()
+    if node_type:match("function") or node_type:match("method") or node_type:match("declaration") then
+      local start_row, start_col, end_row, end_col = node:range()
+      vim.lsp.buf.format({
+        range = {
+          start = { start_row + 1, start_col },
+          ["end"] = { end_row + 1, end_col },
+        }
+      })
+      return
+    end
+    node = node:parent()
+  end
+
+  -- Fallback: format entire file if no function found
+  vim.notify("No function found at cursor, formatting entire file", vim.log.levels.WARN)
+  vim.lsp.buf.format()
+end, { desc = "Format current function" })
 
 -- quick fix
 vim.keymap.set("n", "<leader>k", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
@@ -46,6 +72,11 @@ vim.keymap.set("n", "<leader>J", "<cmd>lprev<CR>zz", { desc = "Previous location
 -- find and replace in file
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Search & replace word" })
 
+-- Find all instances of word under cursor in file (highlight all)
+vim.keymap.set("n", "<leader>fi", function()
+  vim.cmd("highlight Search guibg=#90EE90 guifg=#000000 gui=bold")
+  vim.cmd("normal! *N")
+end, { desc = "Find & highlight all instances of word" })
 
 -- make current file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = "Make file executable", silent = true })

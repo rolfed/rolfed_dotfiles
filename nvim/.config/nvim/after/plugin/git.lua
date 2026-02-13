@@ -1,5 +1,10 @@
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = "Git status" });
 
+-- Git diff commands
+vim.keymap.set('n', '<leader>gd', '<cmd>Git diff<CR>', { desc = "Git diff (all changes)" });
+vim.keymap.set('n', '<leader>gD', '<cmd>Gdiffsplit<CR>', { desc = "Git diff split (current file)" });
+vim.keymap.set('n', '<leader>gv', '<cmd>Gvdiffsplit<CR>', { desc = "Git vertical diff split (current file)" });
+
 require('gitsigns').setup{
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns

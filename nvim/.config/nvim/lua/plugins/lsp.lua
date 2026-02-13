@@ -13,11 +13,11 @@ return {
     config = function()
 
       require("mason-lspconfig").setup({
+        automatic_enable = false,
         -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
         ensure_installed = {
           "bashls",
           "clangd",
-          "denols",
           "lua_ls",
           "vtsls",
         }
@@ -26,7 +26,6 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost" },
     config = function()
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
@@ -83,7 +82,7 @@ return {
       vim.lsp.config.vtsls = {
         filetypes = typescriptFileTypes,
         cmd = { 'vtsls', '--stdio' },
-        root_dir = root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+        root_markers = { 'package.json', 'tsconfig.json', 'jsconfig.json' },
         commands = {
           OrganizeImports = {
             organize_imports,
@@ -152,16 +151,9 @@ return {
       -- Disable ts_ls — vtsls handles TypeScript
       vim.lsp.enable('ts_ls', false)
 
-      -- Restrict denols to Deno projects only (override built-in root_markers that include .git)
-      vim.lsp.config.denols = {
-        root_markers = { 'deno.json', 'deno.jsonc' },
-        root_dir = root_pattern('deno.json', 'deno.jsonc'),
-      }
-
       -- Enable LSP servers
       vim.lsp.enable('lua_ls')
       vim.lsp.enable('vtsls')
-      vim.lsp.enable('denols')
       vim.lsp.enable('html')
       vim.lsp.enable('clangd')
       vim.lsp.enable('gopls')
