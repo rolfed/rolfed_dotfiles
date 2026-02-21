@@ -5,3 +5,14 @@
 --   command  = ":silent! Explore",
 --   group = mygroup
 -- })
+
+-- Treat *.ts.template files as TypeScript for LSP and Treesitter
+vim.filetype.add({
+    extension = {
+        template = function(path)
+            if path:match('%.ts%.template$') then
+                return 'typescript'
+            end
+        end,
+    },
+})
