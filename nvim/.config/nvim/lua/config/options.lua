@@ -7,6 +7,10 @@ vim.opt.nu = true
 --
 
 vim.opt.spell = true
+vim.opt.spelllang = "en_us"
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+vim.opt.spellcapcheck = ""
+vim.opt.spelloptions = "camel,noplainbuffer"
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2

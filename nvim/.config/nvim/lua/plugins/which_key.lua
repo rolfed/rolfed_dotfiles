@@ -5,6 +5,10 @@ return {
     spec = {
       -- Main leader key groups
       { "<leader>c", group = "Code" },
+      { "<leader>cs", group = "Snippets" },
+      { "<leader>css", desc = "Search snippets" },
+      { "<leader>cse", desc = "Edit snippet file" },
+      { "<leader>csr", desc = "Reload snippets" },
       { "<leader>d", group = "Debug" },
       { "<leader>e", group = "Errors/Diagnostics" },
       { "<leader>ee", desc = "Show error details" },
@@ -22,6 +26,12 @@ return {
       { "<leader>p", group = "Project" },
       { "<leader>q", group = "Quickfix" },
       { "<leader>r", group = "Refactor" },
+      { "<leader>S", group = "Spell" },
+      { "<leader>Ss", desc = "Toggle spell check" },
+      { "<leader>Sn", desc = "Next misspelled word" },
+      { "<leader>Sp", desc = "Prev misspelled word" },
+      { "<leader>Sf", desc = "Fix suggestions" },
+      { "<leader>Sa", desc = "Add word to dictionary" },
       { "<leader>s", group = "Search/Split" },
       { "<leader>t", group = "Test/Toggle" },
       { "<leader>u", group = "UI/Undo" },

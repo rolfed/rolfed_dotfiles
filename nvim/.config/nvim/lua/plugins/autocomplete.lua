@@ -15,6 +15,7 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-spell',
             'onsails/lspkind.nvim', -- icons for auto complete
             'windwp/nvim-autopairs'
         },
@@ -26,7 +27,35 @@ return {
             local lspkind = require('lspkind')
 
             require("luasnip.loaders.from_vscode").lazy_load()
+            require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/lua/snippets" } })
             require("nvim-autopairs").setup()
+
+            -- Snippet keymaps
+            local snippet_path = vim.fn.stdpath("config") .. "/lua/snippets"
+
+            vim.keymap.set("n", "<leader>css", function()
+              require("telescope.builtin").find_files({ cwd = snippet_path, prompt_title = "Snippet Files" })
+            end, { desc = "Search snippets" })
+
+            vim.keymap.set("n", "<leader>cse", function()
+              local ft = vim.bo.filetype
+              local file = snippet_path .. "/" .. ft .. ".lua"
+              vim.cmd("edit " .. file)
+            end, { desc = "Edit snippet file for current filetype" })
+
+            vim.keymap.set("n", "<leader>csr", function()
+              require("luasnip.loaders.from_lua").lazy_load({ paths = { snippet_path } })
+              vim.notify("Snippets reloaded", vim.log.levels.INFO)
+            end, { desc = "Reload snippets" })
+
+            -- Snippet jump keymaps
+            vim.keymap.set({ "i", "s" }, "<C-l>", function()
+              if luasnip.jumpable(1) then luasnip.jump(1) end
+            end, { desc = "Snippet: jump to next placeholder" })
+
+            vim.keymap.set({ "i", "s" }, "<C-h>", function()
+              if luasnip.jumpable(-1) then luasnip.jump(-1) end
+            end, { desc = "Snippet: jump to previous placeholder" })
 
             -- Integrate nvim autopairs with cmp
             cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
@@ -58,9 +87,10 @@ return {
                 mapping = cmp.mapping.preset.insert(cmp_mappings),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp", group_index = 1 },                     -- lsp
+                    { name = "luasnip",  max_item_count = 3, group_index = 1 }, -- snippets
                     { name = "buffer",   max_item_count = 5, group_index = 2 }, -- text within current buffer
                     { name = "path",     max_item_count = 3, group_index = 3 }, -- file system paths
-                    { name = "luasnip",  max_item_count = 3, group_index = 5 }, -- snippets
+                    { name = "spell",    max_item_count = 5, group_index = 4 }, -- spell suggestions
                 }),
                 -- Enable pictogram icons for lsp/autocompletion
                 formatting = {

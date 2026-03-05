@@ -89,6 +89,16 @@ vim.keymap.set("n", "<leader><leader>", function()
   vim.cmd("so")
 end, { desc = "Source current file" })
 
+-- Spell checking
+vim.keymap.set("n", "<leader>Ss", function()
+  vim.opt.spell = not vim.opt.spell:get()
+  vim.notify("Spell: " .. (vim.opt.spell:get() and "on" or "off"))
+end, { desc = "Toggle spell check" })
+vim.keymap.set("n", "<leader>Sn", "]s", { desc = "Next misspelled word" })
+vim.keymap.set("n", "<leader>Sp", "[s", { desc = "Prev misspelled word" })
+vim.keymap.set("n", "<leader>Sf", "z=", { desc = "Fix suggestions" })
+vim.keymap.set("n", "<leader>Sa", "zg", { desc = "Add word to dictionary" })
+
 -- MdEval
 vim.keymap.set('n', '<leader>c', function() require 'mdeval'.eval_code_block() end, { desc = "Eval markdown code block" })
 
