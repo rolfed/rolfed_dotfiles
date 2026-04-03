@@ -15,7 +15,6 @@ return {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-spell',
             'onsails/lspkind.nvim', -- icons for auto complete
             'windwp/nvim-autopairs'
         },
@@ -90,7 +89,6 @@ return {
                     { name = "luasnip",  max_item_count = 3, group_index = 1 }, -- snippets
                     { name = "buffer",   max_item_count = 5, group_index = 2 }, -- text within current buffer
                     { name = "path",     max_item_count = 3, group_index = 3 }, -- file system paths
-                    { name = "spell",    max_item_count = 5, group_index = 4 }, -- spell suggestions
                 }),
                 -- Enable pictogram icons for lsp/autocompletion
                 formatting = {

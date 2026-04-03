@@ -11,7 +11,7 @@ alias ll='eza -al --group-directories-first' # lists everything with directories
 alias ls='eza -alF --color=always --sort=size | grep -v /' # lists only files sorted by size
 alias lt='eza -al --sort=modified' # lists everything sorted by time updated
 alias less='less -FSRXc'                    # Preferred 'less' implementation
-cd () { z "$@"; ll; }               # Always list directory contents upon 'cd'
+cd () { z "$@"; [[ -o interactive ]] && ll; }               # Always list directory contents upon 'cd'
 alias edit='nvim'                           # edit:         Opens any file in vim editor
 alias vim='nvim'			    			# vim	    	Opens nvim
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
