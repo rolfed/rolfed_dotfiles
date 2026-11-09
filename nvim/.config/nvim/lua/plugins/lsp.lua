@@ -13,23 +13,34 @@ return {
     config = function()
 
       require("mason-lspconfig").setup({
-        -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
+        -- List of servers: https://github.com/mason-org/mason-lspconfig.nvim?tab=readme-ov-file#configuration
+        -- gopls is absent on purpose: Mason builds it with `go install`,
+        -- which needs a Go toolchain on PATH.
         ensure_installed = {
           "bashls",
           "clangd",
           "denols",
+          "html",
           "lua_ls",
-          "spellcheck",
-          "tsserver",
+          "markdown_oxide",
+          "somesass_ls",
           "ts_ls",
           "vtsls",
-        }
+        },
+        -- vtsls owns TypeScript. ts_ls and denols stay installed but must not
+        -- auto-attach, or all three race for the same buffer.
+        automatic_enable = {
+          exclude = { "denols", "ts_ls" },
+        },
       })
     end
   },
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPost" },
+    -- Not lazy-loaded: vim.lsp.enable() only adopts already-open buffers once
+    -- v:vim_did_enter is 1, so loading this on BufReadPost leaves a file passed
+    -- on the command line with no client.
+    lazy = false,
     config = function()
       -- Integrate LSP with autocomplete
       local capabilities = require('cmp_nvim_lsp')
@@ -55,22 +66,6 @@ return {
         "typescript.tsx",
       }
 
-      -- Helper function to find root directory
-      local function root_pattern(...)
-        local patterns = {...}
-        return function(fname)
-          for _, pattern in ipairs(patterns) do
-            local match = vim.fs.find(pattern, {
-              upward = true,
-              path = vim.fs.dirname(fname),
-            })[1]
-            if match then
-              return vim.fs.dirname(match)
-            end
-          end
-        end
-      end
-
       -- Configure LSP servers using vim.lsp.config
       vim.lsp.config('*', {
         capabilities = capabilities,
@@ -78,15 +73,10 @@ return {
 
       vim.lsp.config.lua_ls = {}
 
-      vim.lsp.config.ts_ls = {
-        enabled = false, -- disable to prioritize vtsls
-        filetypes = typescriptFileTypes,
-      }
-
       vim.lsp.config.vtsls = {
         filetypes = typescriptFileTypes,
         cmd = { 'vtsls', '--stdio' },
-        root_dir = root_pattern('package.json', 'tsconfig.json', 'jsconfig.json', '.git'),
+        root_markers = { { 'package.json', 'tsconfig.json', 'jsconfig.json' }, '.git' },
         commands = {
           OrganizeImports = {
             organize_imports,
@@ -116,37 +106,36 @@ return {
       vim.lsp.config.html = {
         filetypes = { "html", "templ" },
         cmd = { 'vscode-html-language-server', '--stdio' },
-        root_dir = root_pattern('.git'),
-        single_file_support = true,
+        root_markers = { '.git' },
       }
 
       vim.lsp.config.clangd = {
         filetypes = { "c", "cpp" },
         cmd = { 'clangd' },
-        root_dir = root_pattern('compile_commands.json', '.git'),
+        root_markers = { 'compile_commands.json', '.git' },
       }
 
       vim.lsp.config.gopls = {
         cmd = { 'gopls' },
-        root_dir = root_pattern('go.mod', 'go.work', '.git'),
+        root_markers = { { 'go.mod', 'go.work' }, '.git' },
       }
 
       vim.lsp.config.markdown_oxide = {
         cmd = { 'markdown-oxide' },
         filetypes = { 'markdown' },
-        root_dir = root_pattern('.git', '.obsidian'),
+        root_markers = { '.obsidian', '.git' },
       }
 
       vim.lsp.config.somesass_ls = {
         cmd = { 'some-sass-language-server', '--stdio' },
         filetypes = { 'scss', 'sass' },
-        root_dir = root_pattern('.git'),
+        root_markers = { '.git' },
       }
 
       vim.lsp.config.bashls = {
         cmd = { 'bash-language-server', 'start' },
         filetypes = { 'sh', 'bash' },
-        root_dir = root_pattern('.git'),
+        root_markers = { '.git' },
       }
 
       -- Enable LSP servers
