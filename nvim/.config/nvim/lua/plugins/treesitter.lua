@@ -18,6 +18,7 @@ return {
                     "typescript",
                     "css",
                     "c",
+                    "dart",
                     "http"
                 },
                 highlight = { enable = true },

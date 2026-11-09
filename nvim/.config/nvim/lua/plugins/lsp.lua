@@ -14,8 +14,9 @@ return {
 
       require("mason-lspconfig").setup({
         -- List of servers: https://github.com/mason-org/mason-lspconfig.nvim?tab=readme-ov-file#configuration
-        -- gopls is absent on purpose: Mason builds it with `go install`,
-        -- which needs a Go toolchain on PATH.
+        -- dartls and gopls are absent on purpose. The Dart analysis server
+        -- ships with the Dart SDK and has no Mason package, and Mason builds
+        -- gopls with `go install`, which needs a Go toolchain on PATH.
         ensure_installed = {
           "bashls",
           "clangd",
@@ -138,6 +139,13 @@ return {
         root_markers = { '.git' },
       }
 
+      -- Ships with the Dart SDK rather than Mason, so `dart` must be on PATH.
+      vim.lsp.config.dartls = {
+        cmd = { 'dart', 'language-server', '--protocol=lsp' },
+        filetypes = { 'dart' },
+        root_markers = { 'pubspec.yaml', '.git' },
+      }
+
       -- Enable LSP servers
       vim.lsp.enable('lua_ls')
       vim.lsp.enable('vtsls')
@@ -147,6 +155,7 @@ return {
       vim.lsp.enable('markdown_oxide')
       vim.lsp.enable('somesass_ls')
       vim.lsp.enable('bashls')
+      vim.lsp.enable('dartls')
     end
   }
 }
