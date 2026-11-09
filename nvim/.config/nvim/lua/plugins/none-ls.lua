@@ -23,7 +23,6 @@ return {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.prettier,  -- Typescript, javascript, markdown ...
         -- more infor for prettier: https://github.com/nvimtools/none-ls.nvim/blob/main/doc/BUILTINS.md#prettier
-        null_ls.builtins.formatting.alejandra, -- Nix
         null_ls.builtins.completion.spell,
 
         require("none-ls.diagnostics.eslint_d"), -- requires none-ls-extras.nvim

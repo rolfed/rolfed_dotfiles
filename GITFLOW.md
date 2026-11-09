@@ -98,7 +98,6 @@ git checkout main
 ### High-Risk Files
 - `nvim/.config/nvim/init.lua` - Core Neovim config
 - `zsh/.zshrc` - Shell configuration
-- `nix/flake.nix` - System packages
 - `tmux/.tmux.conf` - Terminal multiplexer
 
 ## Recovery Procedures
@@ -183,21 +182,6 @@ git add . && git commit -m "feat(nvim): add new plugin
 
 Manual test: restart nvim, check plugin loads
 Rollback: git checkout HEAD~1 -- nvim/.config/nvim/lua/plugins/new-plugin.lua"
-```
-
-### System Package Addition
-```bash
-# Edit nix config
-vim nix/flake.nix
-
-# Apply changes
-darwin-rebuild switch --flake nix
-
-# Commit
-git add . && git commit -m "feat(nix): add new development tool
-
-Manual test: check tool is available in PATH
-Rollback: git checkout HEAD~1 -- nix/flake.nix && darwin-rebuild switch --flake nix"
 ```
 
 This workflow optimizes for **developer velocity** while maintaining **safety through git**. Simple, predictable, and fast.

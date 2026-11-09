@@ -8,7 +8,7 @@
 stow nvim wezterm tmux zsh scripts starship hammerspoon obsidian
 
 # Update system packages
-cd nix && darwin-rebuild switch --flake .
+brew update && brew upgrade
 
 # Update plugins
 nvim: :Lazy update
@@ -28,13 +28,12 @@ git checkout HEAD~1 -- [file]
 ## High-Impact Files (Always backup before changing)
 - `nvim/.config/nvim/init.lua` - Neovim entry point
 - `zsh/.zshrc` - Shell configuration
-- `nix/flake.nix` - System package management
 - `tmux/.tmux.conf` - Terminal multiplexer
 
 ## Architecture Overview
 
 ### Core Technologies
-- **Nix Darwin**: System packages + Homebrew integration
+- **Homebrew**: System packages
 - **Stow**: Symlink management for dotfiles
 - **Neovim**: 28+ plugins via Lazy.nvim
 - **Tmux**: Session management with Sesh integration
@@ -87,10 +86,6 @@ zsh/
 
 ### System Management
 ```
-nix/
-├── flake.nix                  # System packages + settings
-└── flake.lock                 # Locked dependencies
-
 scripts/.local/bin/            # Custom automation scripts
 ```
 
@@ -98,9 +93,9 @@ scripts/.local/bin/            # Custom automation scripts
 
 ### Adding New Tool
 1. **Read** existing similar configurations
-2. **Add** to appropriate location (plugins/, nix/flake.nix, etc.)
+2. **Add** to appropriate location (plugins/, zsh/zsh_config/, etc.)
 3. **Test** syntax: `lua -c "dofile('file.lua')"`
-4. **Apply**: `stow` or `darwin-rebuild switch --flake nix`
+4. **Apply**: `stow`
 5. **Commit** with clear description
 
 ### Troubleshooting LSP Issues
@@ -175,7 +170,7 @@ export PATH="/usr/bin:/bin"
 4. **Formatting**: Add to Mason ensure_installed
 
 ### Adding New Shell Tools
-1. **Nix**: Add to `nix/flake.nix` systemPackages
+1. **Install**: `brew install [tool]`
 2. **Shell integration**: Add module in `zsh/zsh_config/`
 3. **Aliases**: Include in appropriate numbered module
 
