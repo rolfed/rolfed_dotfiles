@@ -58,14 +58,21 @@ return {
       -- Helper function to find root directory
       local function root_pattern(...)
         local patterns = {...}
-        return function(fname)
+        -- Neovim 0.11 root_dir signature: must call on_dir(root), not return it
+        return function(bufnr, on_dir)
+          local fname = vim.api.nvim_buf_get_name(bufnr)
+          if fname == "" then
+            return
+          end
+
           for _, pattern in ipairs(patterns) do
             local match = vim.fs.find(pattern, {
               upward = true,
               path = vim.fs.dirname(fname),
             })[1]
             if match then
-              return vim.fs.dirname(match)
+              on_dir(vim.fs.dirname(match))
+              return
             end
           end
         end
