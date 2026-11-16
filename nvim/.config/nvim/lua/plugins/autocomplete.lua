@@ -10,7 +10,9 @@ return {
         -- A completion engine plugin for neovim written in Lua.
         -- Completion sources are installed from external repositories and "sourced".
         'hrsh7th/nvim-cmp',
-        event = { "BufReadPost", "BufNewFile" },
+        -- Load at startup so source plugins' after/plugin files register
+        -- (after/plugin/obsidian.lua loads cmp early otherwise and they get skipped)
+        lazy = false,
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
