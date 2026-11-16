@@ -13,6 +13,8 @@ return {
     config = function()
 
       require("mason-lspconfig").setup({
+        -- Don't auto-enable these; vtsls handles TS
+        automatic_enable = { exclude = { "ts_ls", "denols", "jdtls" } },
         -- List of servers: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#configuration
         ensure_installed = {
           "bashls",
